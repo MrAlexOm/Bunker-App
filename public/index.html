@@ -41,6 +41,26 @@
         // Error handling
         window.addEventListener('error', function(e) {
             console.error('BUNKER Error:', e.error);
+            console.error("CRITICAL ERROR:", e.error);
+            console.error("Error details:", {
+                message: e.error?.message,
+                stack: e.error?.stack,
+                filename: e.filename,
+                lineno: e.lineno,
+                colno: e.colno
+            });
+            document.getElementById('root').innerHTML = 
+                '<div class="loading">Ошибка загрузки. Проверьте консоль (F12).</div>';
+        });
+
+        // Unhandled promise rejection handler
+        window.addEventListener('unhandledrejection', function(e) {
+            console.error('BUNKER Unhandled Promise Rejection:', e.reason);
+            console.error("CRITICAL PROMISE ERROR:", e.reason);
+            console.error("Promise details:", {
+                reason: e.reason,
+                promise: e.promise
+            });
             document.getElementById('root').innerHTML = 
                 '<div class="loading">Ошибка загрузки. Проверьте консоль (F12).</div>';
         });
