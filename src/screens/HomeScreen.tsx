@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, LinearGradient } from 'react-native';
 import { useLanguage } from '../contexts/LanguageContext';
 import type { RootStackNavigationProp } from '../types/navigation';
+import BloodTitle from '../components/BloodTitle';
 
 const HomeScreen = ({ navigation }: { navigation: RootStackNavigationProp }) => {
   const { t, language, isRTL } = useLanguage();
@@ -26,10 +27,7 @@ const HomeScreen = ({ navigation }: { navigation: RootStackNavigationProp }) => 
     >
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
         {/* Заголовок BUNKER */}
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerTitle}>BUNKER</Text>
-          <Text style={styles.headerSubtitle}>ОФЛАЙН ПРИЛОЖЕНИЕ ДЛЯ ВЫЖИВАНИЯ</Text>
-        </View>
+        <BloodTitle subtitle="ОФЛАЙН ПРИЛОЖЕНИЕ ДЛЯ ВЫЖИВАНИЯ" />
 
         {/* Огромная кнопка SOS */}
         <TouchableOpacity 
@@ -85,32 +83,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 24,
     paddingBottom: 100,
-  },
-  headerContainer: {
-    alignItems: 'center',
-    marginBottom: 32,
-    paddingTop: 20,
-  },
-  headerTitle: {
-    color: '#FFFFFF',
-    fontSize: 48,
-    fontWeight: '900',
-    textTransform: 'uppercase',
-    letterSpacing: 8,
-    marginBottom: 8,
-    textAlign: 'center',
-    textShadowColor: 'rgba(255,0,0,0.5)',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 8,
-  },
-  headerSubtitle: {
-    color: '#CCCCCC',
-    fontSize: 14,
-    fontWeight: '600',
-    textTransform: 'uppercase',
-    letterSpacing: 2,
-    textAlign: 'center',
-    opacity: 0.8,
   },
   sosButton: {
     backgroundColor: '#FF0000',
