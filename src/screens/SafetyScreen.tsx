@@ -24,6 +24,11 @@ const SafetyScreen = () => {
   const [locationError, setLocationError] = useState<string>('');
   const { data, language, t, isRTL } = useLanguage();
 
+  // Convert degrees to radians
+  const deg2rad = (deg: number) => {
+    return deg * (Math.PI/180);
+  };
+
   // Haversine formula to calculate distance between two points
   const getDistanceFromLatLonInKm = (lat1: number, lon1: number, lat2: number, lon2: number) => {
     const R = 6371; // Radius of Earth in km
@@ -34,10 +39,6 @@ const SafetyScreen = () => {
               Math.sin(dLon/2) * Math.sin(dLon/2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     return R * c;
-  };
-
-  const deg2rad = (deg: number) => {
-    return deg * (Math.PI/180);
   };
 
   const getCurrentLocation = () => {
