@@ -1,22 +1,22 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, LinearGradient } from 'react-native';
-import { useLanguage } from '../contexts/LanguageContext';
+// import { useLanguage } from '../contexts/LanguageContext';
 import type { RootStackNavigationProp } from '../types/navigation';
 // import BloodTitle from '../components/BloodTitle';
 
 const HomeScreen = ({ navigation }: { navigation: RootStackNavigationProp }) => {
-  const { t, language, isRTL } = useLanguage();
-
-  // Получаем переводы для кнопок
+  // Временные хардкодные переводы для теста
   const translations = {
-    sos: t('sos'),
-    danger: t('inDanger'),
-    safety: t('findSafety'),
-    medical: t('firstAid'),
-    supplies: t('supplies'),
-    scenarios: t('scenarios'),
-    panic: t('inPanic')
+    sos: 'SOS',
+    danger: 'В опасности',
+    safety: 'Найти укрытие',
+    medical: 'Первая помощь',
+    supplies: 'Запасы',
+    scenarios: 'Сценарии',
+    panic: 'Я в панике'
   };
+
+  const isRTL = false; // Временно для теста
 
   return (
     <LinearGradient
