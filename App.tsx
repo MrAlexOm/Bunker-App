@@ -37,6 +37,8 @@ const AppNavigator = () => (
 );
 
 export default function App() {
+  console.log("App is rendering");
+  
   return (
     <LanguageProvider>
       <NavigationContainer>
