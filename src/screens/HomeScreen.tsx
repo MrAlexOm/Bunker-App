@@ -48,7 +48,7 @@ const HomeScreen = () => {
           <Text style={styles.gridText}>{translations.medical}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.gridButton} onPress={() => navigation.navigate('Supplies')}>
+        <TouchableOpacity style={styles.gridButton} onPress={() => navigation.navigate('Inventory')}>
           <Text style={styles.gridIcon}>🎒</Text>
           <Text style={styles.gridText}>{translations.supplies}</Text>
         </TouchableOpacity>
