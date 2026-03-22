@@ -9,8 +9,7 @@
     "web": "expo start --web",
     "export": "expo export --platform web",
     "build:web": "npx expo export --platform web --clear && node fix-paths.js",
-    "fix:paths": "node fix-paths.js",
-    "postbuild": "node fix-paths.js"
+    "fix:paths": "node fix-paths.js"
   },
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",

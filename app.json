@@ -32,7 +32,16 @@
       "favicon": "./assets/icon.png",
       "bundler": "metro",
       "output": "single",
-      "baseUrl": "./"
+      "baseUrl": "./",
+      "name": "Bunker",
+      "shortName": "Bunker",
+      "description": "Bunker - Офлайн приложение для выживания",
+      "themeColor": "#0B0B0B",
+      "backgroundColor": "#0B0B0B",
+      "lang": "ru",
+      "meta": {
+        "viewport": "width=device-width, initial-scale=1, shrink-to-fit=no"
+      }
     },
     "extra": {
       "eas": {
