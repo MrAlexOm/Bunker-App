@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { useLanguage } from '../contexts/LanguageContext';
+import type { RootStackNavigationProp } from '../types/navigation';
 
-const SOSScreen = ({ navigation }) => {
+const SOSScreen = ({ navigation }: { navigation: RootStackNavigationProp }) => {
   const { t } = useLanguage();
 
   const sosChecklist = [

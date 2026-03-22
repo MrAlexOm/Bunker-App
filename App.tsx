@@ -13,19 +13,7 @@ import DangerScreen from './src/screens/DangerScreen';
 import ScenariosScreen from './src/screens/ScenariosScreen';
 import PanicScreen from './src/screens/PanicScreen';
 import SafetyScreen from './src/screens/SafetyScreen';
-
-// Create SOSScreen
-const SOSScreen = () => (
-  <View style={{ flex: 1, backgroundColor: '#0B0B0B', justifyContent: 'center', alignItems: 'center', padding: 20 }}>
-    <Text style={{ color: '#FF3B30', fontSize: 32, fontWeight: 'bold', marginBottom: 20 }}>🔴 SOS</Text>
-    <Text style={{ color: '#FFFFFF', fontSize: 18, textAlign: 'center', marginBottom: 20 }}>
-      Экстренная сигнализация активирована
-    </Text>
-    <Text style={{ color: '#A1A1A1', fontSize: 16, textAlign: 'center' }}>
-      Нажмите кнопку назад для возврата на главный экран
-    </Text>
-  </View>
-);
+import SOSScreen from './src/screens/SOSScreen';
 
 const Stack = createNativeStackNavigator();
 
