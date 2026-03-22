@@ -1,92 +1,69 @@
 import React, { useEffect, useRef } from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
+import { View, StyleSheet, Animated, Text } from 'react-native';
 
-const LoadingScreen = ({ onComplete }: { onComplete?: () => void }) => {
-  // Массив элементов сигнала SOS - СТРОГО 9 элементов: 3 точки + 3 тире + 3 точки
-  const signalElements = [
-    { type: 'dot' },
-    { type: 'dot' },
-    { type: 'dot' },
-    { type: 'dash' },
-    { type: 'dash' },
-    { type: 'dash' },
-    { type: 'dot' },
-    { type: 'dot' },
-    { type: 'dot' },
-  ];
+const LoadingScreen = ({ onFinish }: { onFinish: () => void }) => {
+  // Массив элементов: ● ● ● — — ● ●
+  const elements = ['●', '●', '●', '—', '—', '●', '●'];
 
   // Создаем анимированные значения для каждого элемента
-  const animatedValues = useRef(
-    signalElements.map(() => new Animated.Value(1))
+  const animations = useRef(
+    Array(7).fill(0).map(() => new Animated.Value(1))
   ).current;
 
   useEffect(() => {
-    let currentIndex = 0;
-
-    const animateNextElement = () => {
-      // Анимация текущего элемента: увеличение -> уменьшение
-      Animated.sequence([
-        Animated.timing(animatedValues[currentIndex], {
-          toValue: 1.6,
-          duration: 150,
-          useNativeDriver: false,
-        }),
-        Animated.timing(animatedValues[currentIndex], {
-          toValue: 1,
-          duration: 150,
-          useNativeDriver: false,
-        }),
-      ]).start(() => {
-        // Переход к следующему элементу
-        currentIndex = (currentIndex + 1) % signalElements.length;
-        
-        // Пауза после полного цикла
-        if (currentIndex === 0) {
-          setTimeout(animateNextElement, 600);
-        } else {
-          setTimeout(animateNextElement, 50);
-        }
+    const animateSequence = () => {
+      elements.forEach((_, index) => {
+        setTimeout(() => {
+          Animated.sequence([
+            Animated.timing(animations[index], {
+              toValue: 1.6,
+              duration: 200,
+              useNativeDriver: true,
+            }),
+            Animated.timing(animations[index], {
+              toValue: 1,
+              duration: 200,
+              useNativeDriver: true,
+            }),
+          ]).start();
+        }, index * 250);
       });
     };
 
-    // Запускаем анимацию
-    const timer = setTimeout(() => {
-      animateNextElement();
-    }, 500);
+    // Запускаем первую анимацию сразу
+    animateSequence();
 
-    // Переход на главный экран через 3 секунды
-    const completeTimer = setTimeout(() => {
-      if (onComplete) {
-        onComplete();
-      }
+    // Повторяем анимацию каждые 3.5 секунды
+    const interval = setInterval(animateSequence, 3500);
+
+    // Переходим на главный экран через 3 секунды
+    const timeout = setTimeout(() => {
+      onFinish();
     }, 3000);
 
     return () => {
-      clearTimeout(timer);
-      clearTimeout(completeTimer);
+      clearInterval(interval);
+      clearTimeout(timeout);
     };
-  }, [animatedValues, onComplete]);
-
-  const renderSignalElement = (element: { type: string }, index: number) => {
-    const animatedStyle = {
-      transform: [{ scale: animatedValues[index] }],
-    };
-
-    if (element.type === 'dot') {
-      return (
-        <Animated.View key={index} style={[styles.signalElement, styles.dot, animatedStyle]} />
-      );
-    } else {
-      return (
-        <Animated.View key={index} style={[styles.signalElement, styles.dash, animatedStyle]} />
-      );
-    }
-  };
+  }, []);
 
   return (
     <View style={styles.container}>
-      <View style={styles.signalContainer}>
-        {signalElements.map((element, index) => renderSignalElement(element, index))}
+      <View style={styles.sosContainer}>
+        {elements.map((element, index) => (
+          <Animated.Text
+            key={index}
+            style={[
+              styles.element,
+              element === '—' ? styles.dash : styles.dot,
+              {
+                transform: [{ scale: animations[index] }],
+              },
+            ]}
+          >
+            {element}
+          </Animated.Text>
+        ))}
       </View>
     </View>
   );
@@ -99,25 +76,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  signalContainer: {
+  sosContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  signalElement: {
-    marginHorizontal: 4,
+  element: {
+    color: '#FF3B30',
+    fontWeight: 'bold',
+    marginHorizontal: 8,
   },
   dot: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: '#FF3B30',
+    fontSize: 14,
+    lineHeight: 14,
   },
   dash: {
-    width: 24,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: '#FF3B30',
+    fontSize: 28,
+    lineHeight: 28,
+    fontWeight: '900',
   },
 });
 
