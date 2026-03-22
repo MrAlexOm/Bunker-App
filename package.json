@@ -8,8 +8,9 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "export": "expo export --platform web",
-    "build:web": "npx expo export --platform web --clear && node postbuild.js",
-    "fix:paths": "powershell -Command \"(Get-Content dist/index.html) -replace 'src=\\\"/', 'src=\\\"./' -replace 'href=\\\"/', 'href=\\\"./' | Set-Content dist/index.html\""
+    "build:web": "npx expo export --platform web --clear && node fix-paths.js",
+    "fix:paths": "node fix-paths.js",
+    "postbuild": "node fix-paths.js"
   },
   "dependencies": {
     "@expo/metro-runtime": "~6.1.2",
