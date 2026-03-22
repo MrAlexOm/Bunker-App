@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-// import { LanguageProvider } from './src/contexts/LanguageContext';
+import { LanguageProvider } from './src/contexts/LanguageContext';
 
 import HomeScreen from './src/screens/HomeScreen';
 import MedicalScreen from './src/screens/MedicalScreen';
@@ -77,10 +77,12 @@ export default function App() {
   }
   
   return (
-    <NavigationContainer>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0B0B0B' }}>
-        <Text style={{ color: 'white', fontSize: 24 }}>TEST OK</Text>
-      </View>
-    </NavigationContainer>
+    <LanguageProvider>
+      <NavigationContainer>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0B0B0B' }}>
+          <Text style={{ color: 'white', fontSize: 24 }}>TEST OK</Text>
+        </View>
+      </NavigationContainer>
+    </LanguageProvider>
   );
 }
