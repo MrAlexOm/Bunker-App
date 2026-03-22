@@ -1,10 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const HomeScreen = () => {
-  const navigation = useNavigation();
+const HomeScreen = ({ navigation }) => {
   const { t, language, isRTL } = useLanguage();
 
   // Получаем переводы для кнопок

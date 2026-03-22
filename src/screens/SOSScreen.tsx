@@ -1,10 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const SOSScreen = () => {
-  const navigation = useNavigation();
+const SOSScreen = ({ navigation }) => {
   const { t } = useLanguage();
 
   const sosChecklist = [

@@ -1,12 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import BloodTitle from '../components/BloodTitle';
 
 const { height: screenHeight } = Dimensions.get('window');
 
-const DangerScreen = () => {
-  const navigation = useNavigation();
+const DangerScreen = ({ navigation }) => {
 
   const dangerItems = [
     { id: 1, title: 'Обстрел', icon: '💥' },
