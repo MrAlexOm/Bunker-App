@@ -1,0 +1,26 @@
+{
+  "water": {
+    "name": "💧 水",
+    "unit": "升",
+    "per_person_per_day": 3,
+    "measure": "liters"
+  },
+  "food": {
+    "name": "🍞 食物",
+    "unit": "千卡",
+    "per_person_per_day": 2000,
+    "measure": "calories"
+  },
+  "batteries": {
+    "name": "🔋 电池 / 充电宝",
+    "unit": "瓦时",
+    "per_person_per_day": 50,
+    "measure": "watt_hours"
+  },
+  "first_aid": {
+    "name": "💊 急救包",
+    "unit": "套",
+    "per_person": 1,
+    "measure": "kit"
+  }
+}

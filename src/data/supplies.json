@@ -1,0 +1,26 @@
+{
+  "water": {
+    "name": "💧 Вода",
+    "unit": "литров",
+    "per_person_per_day": 3,
+    "measure": "liters"
+  },
+  "food": {
+    "name": "🍞 Еда",
+    "unit": "ккал",
+    "per_person_per_day": 2000,
+    "measure": "calories"
+  },
+  "batteries": {
+    "name": "🔋 Батареи / павербанки",
+    "unit": "Wh",
+    "per_person_per_day": 50,
+    "measure": "watt_hours"
+  },
+  "first_aid": {
+    "name": "💊 Аптечка",
+    "unit": "набор",
+    "per_person": 1,
+    "measure": "kit"
+  }
+}

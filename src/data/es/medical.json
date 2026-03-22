@@ -1,0 +1,47 @@
+{
+  "bleeding": {
+    "title": "Sangrado",
+    "steps": [
+      "Aplica vendaje de presión o torniquete sobre la herida",
+      "Eleva la extremidad por encima del nivel del corazón",
+      "No sueltes la presión hasta que pare el sangrado",
+      "Si es torniquete - anota la hora de aplicación"
+    ]
+  },
+  "fracture": {
+    "title": "Fractura",
+    "steps": [
+      "Inmoviliza la extremidad con férula (materiales improvisados)",
+      "Aplica frío por 15-20 minutos",
+      "No intentes reducir el hueso",
+      "Mantén a la víctima inmóvil"
+    ]
+  },
+  "burn": {
+    "title": "Quemadura",
+    "steps": [
+      "Enfría bajo agua corriente por 15-20 minutos",
+      "Cubre con vendaje estéril",
+      "No pinches las ampollas",
+      "Da analgésico (si está disponible)"
+    ]
+  },
+  "unconscious": {
+    "title": "Pérdida de conciencia",
+    "steps": [
+      "Verifica respiración y pulso",
+      "Sin respiración - inicia respiración artificial",
+      "Coloca a la víctima de lado (posición de recuperación)",
+      "Llama ayuda (si hay conexión)"
+    ]
+  },
+  "poison": {
+    "title": "Envenenamiento",
+    "steps": [
+      "Induce el vómito (si está consciente)",
+      "Da carbón activado (si está disponible)",
+      "No induzcas vómito si es envenenamiento químico",
+      "Asegura descanso, muchos líquidos"
+    ]
+  }
+}

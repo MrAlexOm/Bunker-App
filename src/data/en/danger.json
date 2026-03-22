@@ -1,0 +1,47 @@
+{
+  "shelling": {
+    "title": "Shelling",
+    "steps": [
+      "Lie on the ground, cover your head with your hands",
+      "Find concrete shelter (basement, wall)",
+      "Stay away from windows and glass doors",
+      "Don't run across open areas"
+    ]
+  },
+  "collapse": {
+    "title": "Collapse / Building destruction",
+    "steps": [
+      "Cover your face with your hands, protect your head",
+      "Breathe through fabric (if available)",
+      "Signal: tap at regular intervals",
+      "Save air, don't scream constantly"
+    ]
+  },
+  "checkpoint": {
+    "title": "Checkpoint / Military",
+    "steps": [
+      "Keep your hands visible",
+      "Don't make sudden movements",
+      "Speak calmly, don't argue",
+      "Have documents ready"
+    ]
+  },
+  "crowd": {
+    "title": "Panic / Crowd",
+    "steps": [
+      "Don't go against the flow",
+      "Keep your hands in front of your chest",
+      "Move to the edge of the crowd",
+      "Look for exit or shelter"
+    ]
+  },
+  "no_water": {
+    "title": "No water / food",
+    "steps": [
+      "Identify nearest water sources (taps, stores)",
+      "Collect rainwater if available",
+      "Divide supplies over several days",
+      "Purify water by boiling or tablets"
+    ]
+  }
+}

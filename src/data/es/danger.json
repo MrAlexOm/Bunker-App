@@ -1,0 +1,47 @@
+{
+  "shelling": {
+    "title": "Bombardeo",
+    "steps": [
+      "Acuéstate en el suelo, cúbrete la cabeza con las manos",
+      "Busca refugio de hormigón (sótano, pared)",
+      "Aléjate de ventanas y puertas de vidrio",
+      "No corras por áreas abiertas"
+    ]
+  },
+  "collapse": {
+    "title": "Derrumbe / Destrucción de edificio",
+    "steps": [
+      "Cúbrete la cara con las manos, protege la cabeza",
+      "Respira a través de tela (si está disponible)",
+      "Signal: golpea a intervalos regulares",
+      "Ahorra aire, no grites constantemente"
+    ]
+  },
+  "checkpoint": {
+    "title": "Punto de control / Militar",
+    "steps": [
+      "Mantén las manos visibles",
+      "No hagas movimientos bruscos",
+      "Habla calmadamente, no discutas",
+      "Ten documentos listos"
+    ]
+  },
+  "crowd": {
+    "title": "Pánico / Multitud",
+    "steps": [
+      "No vayas contra la corriente",
+      "Mantén las manos frente al pecho",
+      "Muévete hacia el borde de la multitud",
+      "Busca salida o refugio"
+    ]
+  },
+  "no_water": {
+    "title": "Sin agua / comida",
+    "steps": [
+      "Identifica fuentes de agua cercanas (grifos, tiendas)",
+      "Recoge agua de lluvia si está disponible",
+      "Divide los suministros por varios días",
+      "Purifica el agua hirviendo o con tabletas"
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "bleeding": {
+    "title": "Bleeding",
+    "steps": [
+      "Apply pressure dressing or tourniquet above the wound",
+      "Raise the limb above heart level",
+      "Don't release pressure until bleeding stops",
+      "If tourniquet - record the time applied"
+    ]
+  },
+  "fracture": {
+    "title": "Fracture",
+    "steps": [
+      "Immobilize the limb with a splint (improvised materials)",
+      "Apply cold for 15-20 minutes",
+      "Don't try to set the bone",
+      "Keep the victim still"
+    ]
+  },
+  "burn": {
+    "title": "Burn",
+    "steps": [
+      "Cool under running water for 15-20 minutes",
+      "Cover with sterile dressing",
+      "Don't puncture blisters",
+      "Give painkiller (if available)"
+    ]
+  },
+  "unconscious": {
+    "title": "Unconsciousness",
+    "steps": [
+      "Check breathing and pulse",
+      "If no breathing - start artificial respiration",
+      "Place victim on side (recovery position)",
+      "Call for help (if connection available)"
+    ]
+  },
+  "poison": {
+    "title": "Poisoning",
+    "steps": [
+      "Induce vomiting (if conscious)",
+      "Give activated charcoal (if available)",
+      "Don't induce vomiting if chemical poisoning",
+      "Ensure rest, plenty of fluids"
+    ]
+  }
+}

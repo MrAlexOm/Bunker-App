@@ -1,0 +1,40 @@
+{
+  "points": [
+    {
+      "id": "water1",
+      "type": "water",
+      "coords": { "lat": 50.4501, "lng": 30.5234 },
+      "name": {
+        "ru": "Колонка у школы",
+        "en": "Water standpipe at school",
+        "es": "Columna de agua en la escuela",
+        "ar": "عمود مياه في المدرسة",
+        "zh": "学校水柱"
+      }
+    },
+    {
+      "id": "shelter1",
+      "type": "shelter",
+      "coords": { "lat": 50.4496, "lng": 30.5128 },
+      "name": {
+        "ru": "Метро «Золотые ворота»",
+        "en": "Zoloti Vorota Metro Station",
+        "es": "Estación de Metro Zoloti Vorota",
+        "ar": "محطة مترو زولوتي فوروتا",
+        "zh": "金门地铁站"
+      }
+    },
+    {
+      "id": "aid1",
+      "type": "aid",
+      "coords": { "lat": 50.4473, "lng": 30.5192 },
+      "name": {
+        "ru": "Пункт гуманитарной помощи",
+        "en": "Humanitarian aid point",
+        "es": "Punto de ayuda humanitaria",
+        "ar": "نقطة المساعدة الإنسانية",
+        "zh": "人道援助站"
+      }
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "devices": [
+    {
+      "id": "smartphone",
+      "name": "Смартфон",
+      "type": "smartphone",
+      "power_wh": 5,
+      "description": "Зарядка и базовые функции"
+    },
+    {
+      "id": "laptop",
+      "name": "Ноутбук",
+      "type": "laptop",
+      "power_wh": 65,
+      "description": "Работа и интернет"
+    },
+    {
+      "id": "starlink",
+      "name": "Starlink",
+      "type": "starlink",
+      "power_wh": 150,
+      "description": "Спутниковый интернет"
+    },
+    {
+      "id": "radio",
+      "name": "Рация",
+      "type": "radio",
+      "power_wh": 25,
+      "description": "Связь и экстренная связь"
+    },
+    {
+      "id": "heater",
+      "name": "Тепловизор",
+      "type": "heater",
+      "power_wh": 1500,
+      "description": "Отопление в зимний период"
+    },
+    {
+      "id": "fridge",
+      "name": "Холодильник",
+      "type": "fridge",
+      "power_wh": 150,
+      "description": "Хранение продуктов и лекарств"
+    },
+    {
+      "id": "led_lamp",
+      "name": "LED-лампа",
+      "type": "led_lamp",
+      "power_wh": 10,
+      "description": "Освещение (8 часов/день)"
+    },
+    {
+      "id": "cpap",
+      "name": "CPAP-аппарат",
+      "type": "cpap",
+      "power_wh": 40,
+      "description": "Дыхательная поддержка ночью"
+    },
+    {
+      "id": "inhaler",
+      "name": "Ингалятор",
+      "type": "inhaler",
+      "power_wh": 300,
+      "description": "При астме и других заболеваниях"
+    }
+  ]
+}

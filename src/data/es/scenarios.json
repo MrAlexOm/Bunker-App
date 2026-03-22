@@ -1,0 +1,43 @@
+{
+  "war": {
+    "title": "Comenzó la guerra",
+    "steps": [
+      "Empaca mochila de emergencia (documentos, agua, comida, medicina)",
+      "Carga todos los dispositivos y bancos de energía",
+      "Llena contenedores de agua",
+      "Identifica refugio más cercano",
+      "Sigue anuncios oficiales"
+    ]
+  },
+  "evacuation": {
+    "title": "Evacuación de emergencia",
+    "steps": [
+      "Toma documentos, dinero, medicina",
+      "Agua y comida por 24-72 horas",
+      "Carga teléfono, banco de energía",
+      "Vístete según el clima",
+      "Evita multitudes",
+      "Usa rutas seguras"
+    ]
+  },
+  "under_rubble": {
+    "title": "Estás bajo escombros",
+    "steps": [
+      "Calma tu respiración, respira uniformemente",
+      "Ahorra aire - no grites",
+      "Golpea superficie dura cada 10-15 minutos",
+      "Si tienes linterna - señaliza",
+      "Preserva energía"
+    ]
+  },
+  "border_closed": {
+    "title": "Fronteras cerradas",
+    "steps": [
+      "Busca lugar seguro para estancia temporal",
+      "Aprende reglas de residencia en el país",
+      "Regístrate con autoridades locales (si se requiere)",
+      "Busca ayuda humanitaria",
+      "Mantén contacto con compatriotas"
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{ 
+  "devices": [ 
+    { "id": "smartphone", "name": "Смартфон", "power_wh": 5, "type": "rechargeable", "icon": "??" }, 
+    { "id": "cpap", "name": "CPAP-аппарат", "power_wh": 50, "type": "medical", "icon": "??" }, 
+    { "id": "led_lamp", "name": "LED-лампа", "power_w": 3, "type": "continuous", "icon": "??" } 
+  ] 
+} 

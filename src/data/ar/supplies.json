@@ -1,0 +1,26 @@
+{
+  "water": {
+    "name": "💧 ماء",
+    "unit": "لتر",
+    "per_person_per_day": 3,
+    "measure": "liters"
+  },
+  "food": {
+    "name": "🍞 طعام",
+    "unit": "سعرة حرارية",
+    "per_person_per_day": 2000,
+    "measure": "calories"
+  },
+  "batteries": {
+    "name": "🔋 بطاريات / بنوك طاقة",
+    "unit": "وات-ساعة",
+    "per_person_per_day": 50,
+    "measure": "watt_hours"
+  },
+  "first_aid": {
+    "name": "💊 حقيبة إسعاف أولي",
+    "unit": "طقم",
+    "per_person": 1,
+    "measure": "kit"
+  }
+}

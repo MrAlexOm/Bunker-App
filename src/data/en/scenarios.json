@@ -1,0 +1,43 @@
+{
+  "war": {
+    "title": "War started",
+    "steps": [
+      "Pack emergency bag (documents, water, food, medicine)",
+      "Charge all devices and power banks",
+      "Fill water containers",
+      "Identify nearest shelter",
+      "Follow official announcements"
+    ]
+  },
+  "evacuation": {
+    "title": "Emergency evacuation",
+    "steps": [
+      "Take documents, money, medicine",
+      "Water and food for 24-72 hours",
+      "Charge phone, power bank",
+      "Dress for weather",
+      "Avoid crowds",
+      "Use safe routes"
+    ]
+  },
+  "under_rubble": {
+    "title": "You're under rubble",
+    "steps": [
+      "Calm your breathing, breathe evenly",
+      "Save air - don't scream",
+      "Tap on hard surface every 10-15 minutes",
+      "If flashlight - signal",
+      "Preserve energy"
+    ]
+  },
+  "border_closed": {
+    "title": "Borders closed",
+    "steps": [
+      "Find safe place for temporary stay",
+      "Learn residence rules in the country",
+      "Register with local authorities (if required)",
+      "Seek humanitarian aid",
+      "Maintain contact with compatriots"
+    ]
+  }
+}

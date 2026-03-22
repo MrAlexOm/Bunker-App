@@ -1,0 +1,26 @@
+{
+  "water": {
+    "name": "💧 Water",
+    "unit": "liters",
+    "per_person_per_day": 3,
+    "measure": "liters"
+  },
+  "food": {
+    "name": "🍞 Food",
+    "unit": "kcal",
+    "per_person_per_day": 2000,
+    "measure": "calories"
+  },
+  "batteries": {
+    "name": "🔋 Batteries / Power banks",
+    "unit": "Wh",
+    "per_person_per_day": 50,
+    "measure": "watt_hours"
+  },
+  "first_aid": {
+    "name": "💊 First aid kit",
+    "unit": "kit",
+    "per_person": 1,
+    "measure": "kit"
+  }
+}

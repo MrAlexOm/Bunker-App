@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Day X - Система мониторинга и выживания">
+    <title>Day X</title>
+    <link rel="icon" href="./favicon.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            color: #ffffff;
+        }
+        #root {
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #FF4500;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="loading">Загрузка Day X...</div>
+    </div>
+    <script>
+        // Handle relative paths for Netlify
+        window.__EXPO_BASE_URL__ = './';
+        
+        // Error handling
+        window.addEventListener('error', function(e) {
+            console.error('Day X Error:', e.error);
+            document.getElementById('root').innerHTML = 
+                '<div class="loading">Ошибка загрузки. Проверьте консоль (F12).</div>';
+        });
+        
+        // Console log for debugging
+        console.log('Day X Web App Loading...');
+    </script>
+</body>
+</html>
