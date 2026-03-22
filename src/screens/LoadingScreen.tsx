@@ -24,7 +24,7 @@ const LoadingScreen = ({ onComplete }: { onComplete?: () => void }) => {
     let currentIndex = 0;
 
     const animateNextElement = () => {
-      // Анимация текущего элемента: увеличение → уменьшение
+      // Анимация текущего элемента: увеличение -> уменьшение
       Animated.sequence([
         Animated.timing(animatedValues[currentIndex], {
           toValue: 1.6,

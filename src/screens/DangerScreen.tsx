@@ -45,7 +45,7 @@ const DangerScreen = ({ navigation }: { navigation: RootStackNavigationProp }) =
               <Text style={styles.dangerIconText}>{item.icon}</Text>
             </View>
             <Text style={styles.dangerTitle}>{item.title}</Text>
-            <Text style={styles.dangerArrow}>→</Text>
+            <Text style={styles.dangerArrow}>-></Text>
           </TouchableOpacity>
         ))}
       </View>

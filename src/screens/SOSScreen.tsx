@@ -60,7 +60,7 @@ const SOSScreen = ({ navigation }: { navigation: RootStackNavigationProp }) => {
         style={styles.backButton} 
         onPress={() => navigation.goBack()}
       >
-        <Text style={styles.backButtonText}>← Вернуться</Text>
+        <Text style={styles.backButtonText}>- Вернуться</Text>
       </TouchableOpacity>
     </ScrollView>
   );
