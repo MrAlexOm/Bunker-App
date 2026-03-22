@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { LanguageProvider } from './src/contexts/LanguageContext';
+// import { LanguageProvider } from './src/contexts/LanguageContext';
 
 import HomeScreen from './src/screens/HomeScreen';
 import MedicalScreen from './src/screens/MedicalScreen';
@@ -77,10 +77,8 @@ export default function App() {
   }
   
   return (
-    <LanguageProvider>
-      <NavigationContainer>
-        <AppNavigator />
-      </NavigationContainer>
-    </LanguageProvider>
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
   );
 }
