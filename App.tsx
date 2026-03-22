@@ -26,14 +26,6 @@ const AppNavigator = () => (
     }}
   >
     <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="SOSScreen" component={SOSScreen} />
-    <Stack.Screen name="Danger" component={DangerScreen} />
-    <Stack.Screen name="Safety" component={SafetyScreen} />
-    <Stack.Screen name="Medical" component={MedicalScreen} />
-    <Stack.Screen name="Inventory" component={InventoryScreen} />
-    <Stack.Screen name="Scenarios" component={ScenariosScreen} />
-    <Stack.Screen name="Panic" component={PanicScreen} />
-    <Stack.Screen name="Settings" component={SettingsScreen} />
   </Stack.Navigator>
 );
 
@@ -79,9 +71,7 @@ export default function App() {
   return (
     <LanguageProvider>
       <NavigationContainer>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0B0B0B' }}>
-          <Text style={{ color: 'white', fontSize: 24 }}>TEST OK</Text>
-        </View>
+        <AppNavigator />
       </NavigationContainer>
     </LanguageProvider>
   );
