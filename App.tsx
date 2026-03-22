@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -40,10 +40,53 @@ const AppNavigator = () => (
 export default function App() {
   console.log("App is rendering");
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    console.log("App useEffect - checking for errors");
+    
+    // Try to detect any initialization errors
+    try {
+      // Test if we can access basic features
+      const testStorage = typeof localStorage !== 'undefined';
+      const testFetch = typeof fetch !== 'undefined';
+      console.log("Environment check:", { testStorage, testFetch });
+    } catch (e) {
+      console.error("Environment check failed:", e);
+      setError(e);
+    }
+  }, []);
 
   const handleLoadingComplete = () => {
+    console.log("Loading complete, transitioning to main app");
     setIsLoading(false);
   };
+
+  const handleError = (err) => {
+    console.error("App error caught:", err);
+    setError(err);
+    setIsLoading(false);
+  };
+
+  if (error) {
+    console.log("Showing error screen:", error);
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0B0B0B', padding: 20 }}>
+        <Text style={{ color: '#FF3B30', fontSize: 18, textAlign: 'center', marginBottom: 20 }}>
+          ERROR: {error?.toString()}
+        </Text>
+        <Text style={{ color: '#FFFFFF', fontSize: 14, textAlign: 'center', marginBottom: 10 }}>
+          Type: {error?.constructor?.name || 'Unknown'}
+        </Text>
+        <Text style={{ color: '#CCCCCC', fontSize: 12, textAlign: 'center' }}>
+          Message: {error?.message || 'No message'}
+        </Text>
+        <Text style={{ color: '#CCCCCC', fontSize: 12, textAlign: 'center', marginTop: 10 }}>
+          Stack: {error?.stack?.split('\n')[0] || 'No stack'}
+        </Text>
+      </View>
+    );
+  }
 
   if (isLoading) {
     return (

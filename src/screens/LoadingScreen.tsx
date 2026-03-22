@@ -2,12 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Animated, Text } from 'react-native';
 
 const LoadingScreen = ({ onFinish }: { onFinish: () => void }) => {
-  // Массив элементов: ● ● ● — — ● ●
-  const elements = ['●', '●', '●', '—', '—', '●', '●'];
+  // Массив элементов: ● ● ● — — — ● ● ● (СТРОГО 9 элементов)
+  const elements = ['●', '●', '●', '—', '—', '—', '●', '●', '●'];
 
   // Создаем анимированные значения для каждого элемента
   const animations = useRef(
-    Array(7).fill(0).map(() => new Animated.Value(1))
+    Array(9).fill(0).map(() => new Animated.Value(1))
   ).current;
 
   useEffect(() => {
@@ -18,12 +18,12 @@ const LoadingScreen = ({ onFinish }: { onFinish: () => void }) => {
             Animated.timing(animations[index], {
               toValue: 1.6,
               duration: 200,
-              useNativeDriver: true,
+              useNativeDriver: false,
             }),
             Animated.timing(animations[index], {
               toValue: 1,
               duration: 200,
-              useNativeDriver: true,
+              useNativeDriver: false,
             }),
           ]).start();
         }, index * 250);

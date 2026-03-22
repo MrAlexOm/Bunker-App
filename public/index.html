@@ -49,8 +49,23 @@
                 lineno: e.lineno,
                 colno: e.colno
             });
-            document.getElementById('root').innerHTML = 
-                '<div class="loading">Ошибка загрузки. Проверьте консоль (F12).</div>';
+            
+            // Show real error on screen instead of generic message
+            const errorText = e.error?.toString() || 'Unknown error occurred';
+            const errorMessage = e.error?.message || 'No message available';
+            const errorStack = e.error?.stack?.split('\n')[0] || 'No stack trace';
+            
+            document.getElementById('root').innerHTML = `
+                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #0B0B0B; color: #FF3B30; font-family: Arial, sans-serif; text-align: center; padding: 20px;">
+                    <div>
+                        <h2 style="color: #FF3B30; margin-bottom: 20px;">ERROR: ${errorText}</h2>
+                        <p style="color: #FFFFFF; margin-bottom: 10px;">Type: ${e.error?.constructor?.name || 'Unknown'}</p>
+                        <p style="color: #CCCCCC; margin-bottom: 10px;">Message: ${errorMessage}</p>
+                        <p style="color: #CCCCCC; margin-bottom: 10px;">File: ${e.filename}:${e.lineno}:${e.colno}</p>
+                        <p style="color: #CCCCCC; font-size: 12px;">Stack: ${errorStack}</p>
+                    </div>
+                </div>
+            `;
         });
 
         // Unhandled promise rejection handler
@@ -61,8 +76,21 @@
                 reason: e.reason,
                 promise: e.promise
             });
-            document.getElementById('root').innerHTML = 
-                '<div class="loading">Ошибка загрузки. Проверьте консоль (F12).</div>';
+            
+            // Show real promise error on screen
+            const errorText = e.reason?.toString() || 'Unknown promise rejection';
+            const errorMessage = e.reason?.message || 'No message available';
+            
+            document.getElementById('root').innerHTML = `
+                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #0B0B0B; color: #FF3B30; font-family: Arial, sans-serif; text-align: center; padding: 20px;">
+                    <div>
+                        <h2 style="color: #FF3B30; margin-bottom: 20px;">PROMISE ERROR: ${errorText}</h2>
+                        <p style="color: #FFFFFF; margin-bottom: 10px;">Type: Promise Rejection</p>
+                        <p style="color: #CCCCCC; margin-bottom: 10px;">Message: ${errorMessage}</p>
+                        <p style="color: #CCCCCC; font-size: 12px;">Reason: ${JSON.stringify(e.reason, null, 2)}</p>
+                    </div>
+                </div>
+            `;
         });
         
         // Console log for debugging
