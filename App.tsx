@@ -14,7 +14,7 @@ import ScenariosScreen from './src/screens/ScenariosScreen';
 import PanicScreen from './src/screens/PanicScreen';
 import SafetyScreen from './src/screens/SafetyScreen';
 import SOSScreen from './src/screens/SOSScreen';
-import LoadingScreen from './src/screens/LoadingScreen';
+// import LoadingScreen from './src/screens/LoadingScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,7 +39,6 @@ const AppNavigator = () => (
 
 export default function App() {
   console.log("App is rendering");
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -56,17 +55,6 @@ export default function App() {
       setError(e);
     }
   }, []);
-
-  const handleLoadingComplete = () => {
-    console.log("Loading complete, transitioning to main app");
-    setIsLoading(false);
-  };
-
-  const handleError = (err) => {
-    console.error("App error caught:", err);
-    setError(err);
-    setIsLoading(false);
-  };
 
   if (error) {
     console.log("Showing error screen:", error);
@@ -85,14 +73,6 @@ export default function App() {
           Stack: {error?.stack?.split('\n')[0] || 'No stack'}
         </Text>
       </View>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <LanguageProvider>
-        <LoadingScreen onFinish={handleLoadingComplete} />
-      </LanguageProvider>
     );
   }
   
