@@ -1,168 +1,34 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+// Импортируем все JSON-файлы статически
+import ruDanger from '../data/ru/danger.json';
+import ruMedical from '../data/ru/medical.json';
+import ruScenarios from '../data/ru/scenarios.json';
+import ruSupplies from '../data/ru/supplies.json';
+import ruMapPoints from '../data/ru/map_points.json';
 
-// UI translations - moved to top to avoid circular dependencies
-const uiTranslations = {
-  ru: {
-    sos: 'SOS',
-    inDanger: 'Я в опасности',
-    findSafety: 'Найти безопасность',
-    medical: 'Первая помощь',
-    supplies: 'Запасы',
-    scenarios: 'Сценарии',
-    inPanic: 'Я в панике',
-    home: 'Главная',
-    inventory: 'Запасы',
-    settings: 'Настройки',
-    water: 'Вода',
-    food: 'Еда',
-    batteries: 'Батареи',
-    people: 'Люди',
-    days: 'дней',
-    enoughFor: 'Хватит на',
-    dangerousSituations: 'Опасные ситуации',
-    firstAidTitle: 'Первая помощь',
-    inventoryTitle: 'Запасы',
-    scenariosTitle: 'Сценарии',
-    safePlaces: 'Безопасные места',
-    bunkerApp: 'Bunker v2.0',
-    appDescription: 'Приложение для выживания в кризисных ситуациях',
-    step: 'Шаг',
-    swipeNext: 'Свайп -> следующий шаг',
-    allStepsComplete: '✅ Все шаги выполнены',
-    liters: 'Литры',
-    calories: 'Калории',
-    wattHours: 'Ватт-часы',
-    count: 'Количество человек'
-  },
-  en: {
-    sos: 'SOS',
-    inDanger: 'I\'m in danger',
-    findSafety: 'Find safety',
-    medical: 'First aid',
-    supplies: 'Supplies',
-    scenarios: 'Scenarios',
-    inPanic: 'I\'m in panic',
-    home: 'Home',
-    inventory: 'Inventory',
-    settings: 'Settings',
-    water: 'Water',
-    food: 'Food',
-    batteries: 'Batteries',
-    people: 'People',
-    days: 'days',
-    enoughFor: 'Enough for',
-    dangerousSituations: 'Dangerous situations',
-    firstAidTitle: 'First aid',
-    inventoryTitle: 'Inventory',
-    scenariosTitle: 'Scenarios',
-    safePlaces: 'Safe places',
-    bunkerApp: 'Bunker v2.0',
-    appDescription: 'Survival app for crisis situations',
-    step: 'Step',
-    swipeNext: 'Swipe -> next step',
-    allStepsComplete: '✅ All steps complete',
-    liters: 'Liters',
-    calories: 'Calories',
-    wattHours: 'Watt-hours',
-    count: 'Number of people'
-  },
-  es: {
-    sos: 'SOS',
-    inDanger: 'Estoy en peligro',
-    findSafety: 'Encontrar seguridad',
-    medical: 'Primeros auxilios',
-    supplies: 'Suministros',
-    scenarios: 'Escenarios',
-    inPanic: 'Estoy en pánico',
-    home: 'Inicio',
-    inventory: 'Inventario',
-    settings: 'Configuración',
-    water: 'Agua',
-    food: 'Comida',
-    batteries: 'Baterías',
-    people: 'Personas',
-    days: 'días',
-    enoughFor: 'Suficiente para',
-    dangerousSituations: 'Situaciones peligrosas',
-    firstAidTitle: 'Primeros auxilios',
-    inventoryTitle: 'Inventario',
-    scenariosTitle: 'Escenarios',
-    safePlaces: 'Lugares seguros',
-    bunkerApp: 'Bunker v2.0',
-    appDescription: 'Aplicación de supervivencia para crisis',
-    step: 'Paso',
-    swipeNext: 'Desliza -> siguiente paso',
-    allStepsComplete: '✅ Todos los pasos completos',
-    liters: 'Litros',
-    calories: 'Calorías',
-    wattHours: 'Vatios-hora',
-    count: 'Número de personas'
-  },
-  ar: {
-    sos: 'SOS',
-    inDanger: 'أنا في خطر',
-    findSafety: 'ابحث عن الأمان',
-    medical: 'الإسعاف الأولي',
-    supplies: 'الإمدادات',
-    scenarios: 'سيناريوهات',
-    inPanic: 'أنا في حالة ذعر',
-    home: 'الرئيسية',
-    inventory: 'المخزون',
-    settings: 'الإعدادات',
-    water: 'ماء',
-    food: 'طعام',
-    batteries: 'بطاريات',
-    people: 'أشخاص',
-    days: 'أيام',
-    enoughFor: 'يكفي لـ',
-    dangerousSituations: 'مواقف خطرة',
-    firstAidTitle: 'الإسعاف الأولي',
-    inventoryTitle: 'المخزون',
-    scenariosTitle: 'سيناريوهات',
-    safePlaces: 'أماكن آمنة',
-    bunkerApp: 'Bunker v2.0',
-    appDescription: 'تطبيق البقاء للأزمات',
-    step: 'خطوة',
-    swipeNext: 'اسحب -> الخطوة التالية',
-    allStepsComplete: '✅ جميع الخطوات مكتملة',
-    liters: 'لتر',
-    calories: 'سعرة حرارية',
-    wattHours: 'وات-ساعة',
-    count: 'عدد الأشخاص'
-  },
-  zh: {
-    sos: 'SOS',
-    inDanger: '我处于危险中',
-    findSafety: '寻找安全',
-    medical: '急救',
-    supplies: '物资',
-    scenarios: '情景',
-    inPanic: '我恐慌',
-    home: '主页',
-    inventory: '库存',
-    settings: '设置',
-    water: '水',
-    food: '食物',
-    batteries: '电池',
-    people: '人员',
-    days: '天',
-    enoughFor: '足够',
-    dangerousSituations: '危险情况',
-    firstAidTitle: '急救',
-    inventoryTitle: '库存',
-    scenariosTitle: '情景',
-    safePlaces: '安全地点',
-    bunkerApp: 'Bunker v2.0',
-    appDescription: '危机生存应用',
-    step: '步骤',
-    swipeNext: '滑动 -> 下一步',
-    allStepsComplete: '✅ 所有步骤完成',
-    liters: '升',
-    calories: '千卡',
-    wattHours: '瓦时',
-    count: '人数'
-  }
-};
+import enDanger from '../data/en/danger.json';
+import enMedical from '../data/en/medical.json';
+import enScenarios from '../data/en/scenarios.json';
+import enSupplies from '../data/en/supplies.json';
+import enMapPoints from '../data/en/map_points.json';
+
+import esDanger from '../data/es/danger.json';
+import esMedical from '../data/es/medical.json';
+import esScenarios from '../data/es/scenarios.json';
+import esSupplies from '../data/es/supplies.json';
+import esMapPoints from '../data/es/map_points.json';
+
+import arDanger from '../data/ar/danger.json';
+import arMedical from '../data/ar/medical.json';
+import arScenarios from '../data/ar/scenarios.json';
+import arSupplies from '../data/ar/supplies.json';
+import arMapPoints from '../data/ar/map_points.json';
+
+import zhDanger from '../data/zh/danger.json';
+import zhMedical from '../data/zh/medical.json';
+import zhScenarios from '../data/zh/scenarios.json';
+import zhSupplies from '../data/zh/supplies.json';
+import zhMapPoints from '../data/zh/map_points.json';
 
 type Language = 'ru' | 'en' | 'es' | 'ar' | 'zh';
 
@@ -181,63 +47,176 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within LanguageProvider');
+// Переводы для UI-элементов (кнопки, заголовки)
+const uiTranslations: Record<Language, Record<string, string>> = {
+  ru: {
+    sos: 'SOS',
+    danger: 'Я в опасности',
+    safety: 'Найти безопасность',
+    medical: 'Первая помощь',
+    supplies: 'Запасы',
+    scenarios: 'Сценарии',
+    panic: 'Я в панике',
+    settings: 'Настройки',
+    inventory: 'Запасы',
+    days: 'Хватит на',
+    people: 'человек',
+    water: 'Вода (л)',
+    food: 'Еда (ккал)',
+    batteries: 'Батареи (Wh)',
+    step: 'Шаг',
+    swipe_next: 'Свайп → следующий шаг',
+    all_done: 'Все шаги выполнены'
+  },
+  en: {
+    sos: 'SOS',
+    danger: 'I am in danger',
+    safety: 'Find safety',
+    medical: 'First aid',
+    supplies: 'Supplies',
+    scenarios: 'Scenarios',
+    panic: 'Panic mode',
+    settings: 'Settings',
+    inventory: 'Supplies',
+    days: 'Enough for',
+    people: 'people',
+    water: 'Water (L)',
+    food: 'Food (kcal)',
+    batteries: 'Batteries (Wh)',
+    step: 'Step',
+    swipe_next: 'Swipe → next step',
+    all_done: 'All steps completed'
+  },
+  es: {
+    sos: 'SOS',
+    danger: 'Estoy en peligro',
+    safety: 'Encontrar seguridad',
+    medical: 'Primeros auxilios',
+    supplies: 'Suministros',
+    scenarios: 'Escenarios',
+    panic: 'Modo pánico',
+    settings: 'Ajustes',
+    inventory: 'Suministros',
+    days: 'Suficiente para',
+    people: 'personas',
+    water: 'Agua (L)',
+    food: 'Comida (kcal)',
+    batteries: 'Baterías (Wh)',
+    step: 'Paso',
+    swipe_next: 'Deslizar → siguiente paso',
+    all_done: 'Todos los pasos completados'
+  },
+  ar: {
+    sos: 'SOS',
+    danger: 'أنا في خطر',
+    safety: 'ابحث عن مكان آمن',
+    medical: 'إسعافات أولية',
+    supplies: 'لوازم',
+    scenarios: 'سيناريوهات',
+    panic: 'وضع الذعر',
+    settings: 'الإعدادات',
+    inventory: 'لوازم',
+    days: 'يكفي لـ',
+    people: 'أشخاص',
+    water: 'ماء (لتر)',
+    food: 'طعام (سعرات)',
+    batteries: 'بطاريات (واط/ساعة)',
+    step: 'خطوة',
+    swipe_next: 'اسحب → الخطوة التالية',
+    all_done: 'تمت جميع الخطوات'
+  },
+  zh: {
+    sos: 'SOS',
+    danger: '我处于危险中',
+    safety: '寻找安全地点',
+    medical: '急救',
+    supplies: '物资',
+    scenarios: '情景',
+    panic: '恐慌模式',
+    settings: '设置',
+    inventory: '物资',
+    days: '足够维持',
+    people: '人',
+    water: '水（升）',
+    food: '食物（千卡）',
+    batteries: '电池（瓦时）',
+    step: '步骤',
+    swipe_next: '滑动 → 下一步',
+    all_done: '所有步骤已完成'
   }
-  return context;
 };
 
-interface LanguageProviderProps {
-  children: ReactNode;
-}
+// Статические данные для всех языков
+const dataByLanguage: Record<Language, any> = {
+  ru: {
+    danger: ruDanger,
+    medical: ruMedical,
+    scenarios: ruScenarios,
+    supplies: ruSupplies,
+    mapPoints: ruMapPoints,
+  },
+  en: {
+    danger: enDanger,
+    medical: enMedical,
+    scenarios: enScenarios,
+    supplies: enSupplies,
+    mapPoints: enMapPoints,
+  },
+  es: {
+    danger: esDanger,
+    medical: esMedical,
+    scenarios: esScenarios,
+    supplies: esSupplies,
+    mapPoints: esMapPoints,
+  },
+  ar: {
+    danger: arDanger,
+    medical: arMedical,
+    scenarios: arScenarios,
+    supplies: arSupplies,
+    mapPoints: arMapPoints,
+  },
+  zh: {
+    danger: zhDanger,
+    medical: zhMedical,
+    scenarios: zhScenarios,
+    supplies: zhSupplies,
+    mapPoints: zhMapPoints,
+  },
+};
 
-export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>('ru');
+export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [language, setLanguage] = useState<Language>('ru');
 
-  // Load saved language from localStorage (web only)
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const savedLanguage = localStorage.getItem('bunker-language') as Language;
-        if (savedLanguage && ['ru', 'en', 'es', 'ar', 'zh'].includes(savedLanguage)) {
-          setLanguageState(savedLanguage);
-        }
-      } catch (error) {
-        console.warn('LocalStorage unavailable');
-      }
+    const saved = localStorage.getItem('bunker_language') as Language | null;
+    if (saved && ['ru', 'en', 'es', 'ar', 'zh'].includes(saved)) {
+      setLanguage(saved);
     }
   }, []);
 
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    if (typeof window !== 'undefined') {
-      try {
-        localStorage.setItem('bunker-language', lang);
-      } catch (error) {
-        // Silent fail for mobile
-      }
-    }
+  const handleSetLanguage = (lang: Language) => {
+    setLanguage(lang);
+    localStorage.setItem('bunker_language', lang);
   };
 
-  const t = (key: string) => {
-    const translations = uiTranslations[language] || uiTranslations.ru;
-    return (translations as any)[key] || key;
+  const t = (key: string): string => {
+    return uiTranslations[language][key] || key;
   };
 
-  // Simple fallback data - no dynamic imports to avoid circular dependencies
-  const data = {
-    danger: [],
-    medical: [],
-    scenarios: [],
-    supplies: [],
-    mapPoints: []
-  };
+  const data = dataByLanguage[language];
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, data }}>
+    <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t, data }}>
       {children}
     </LanguageContext.Provider>
   );
+};
+
+export const useLanguage = (): LanguageContextType => {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
 };
