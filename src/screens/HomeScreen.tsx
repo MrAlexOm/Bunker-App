@@ -33,8 +33,11 @@ const HomeScreen = () => {
           <Text style={styles.dangerText}>{translations.danger}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.gridButton}>
-          <Text style={styles.gridText}>{translations.safety}</Text>
+        <TouchableOpacity style={styles.safetyButton}>
+          <View style={styles.safetyIconContainer}>
+            <Text style={styles.shieldIcon}>🛡️</Text>
+          </View>
+          <Text style={styles.safetyText}>{translations.safety}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.gridButton}>
@@ -149,6 +152,45 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   dangerText: {
+    color: '#D4D4D4',
+    fontSize: 16,
+    fontWeight: '800',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    lineHeight: 20,
+    textShadowColor: '#000000',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 3,
+    letterSpacing: 1,
+  },
+  safetyButton: {
+    backgroundColor: '#2A2A2A',
+    borderRadius: 16,
+    width: '48%',
+    paddingVertical: 25,
+    alignItems: 'center',
+    marginBottom: 16,
+    minHeight: 120,
+    borderWidth: 3,
+    borderColor: '#444444',
+    shadowColor: '#000000',
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 6,
+    elevation: 8,
+  },
+  safetyIconContainer: {
+    alignSelf: 'flex-start',
+    marginBottom: 8,
+  },
+  shieldIcon: {
+    fontSize: 28,
+    color: '#C0C0C0',
+    textShadowColor: '#666666',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 3,
+  },
+  safetyText: {
     color: '#D4D4D4',
     fontSize: 16,
     fontWeight: '800',
