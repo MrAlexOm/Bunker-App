@@ -16,13 +16,8 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Заголовок BUNKER с иконками */}
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerIcon}>⛨</Text>
-        <Text style={styles.headerTitle}>BUNKER</Text>
-        <Text style={styles.headerIcon}>⚙️</Text>
-      </View>
-      <Text style={styles.headerSubtitle}>ОФЛАЙН ПРИЛОЖЕНИЕ ДЛЯ ВЫЖИВАНИЯ</Text>
+      {/* Заголовок BUNKER */}
+      <Text style={styles.headerTitle}>BUNKER</Text>
 
       {/* Огромная кнопка SOS */}
       <TouchableOpacity style={styles.sosButton}>
@@ -63,20 +58,6 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingHorizontal: 24,
   },
-  headerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 8,
-  },
-  headerIcon: {
-    color: '#8B8B8B',
-    fontSize: 32,
-    marginHorizontal: 15,
-    textShadowColor: '#4A4A4A',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 3,
-  },
   headerTitle: {
     color: '#C0C0C0',
     fontSize: 48,
@@ -84,22 +65,10 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 8,
     textAlign: 'center',
+    marginBottom: 32,
     textShadowColor: '#4A4A4A',
     textShadowOffset: { width: 3, height: 3 },
     textShadowRadius: 5,
-  },
-  headerSubtitle: {
-    color: '#8B8B8B',
-    fontSize: 14,
-    fontWeight: '600',
-    textTransform: 'uppercase',
-    letterSpacing: 2,
-    textAlign: 'center',
-    opacity: 0.9,
-    marginBottom: 32,
-    textShadowColor: '#4A4A4A',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
   },
   sosButton: {
     backgroundColor: '#8B0000',
