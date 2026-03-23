@@ -26,8 +26,11 @@ const HomeScreen = () => {
 
       {/* Сетка 2×2 */}
       <View style={styles.grid}>
-        <TouchableOpacity style={styles.gridButton}>
-          <Text style={styles.gridText}>{translations.danger}</Text>
+        <TouchableOpacity style={styles.dangerButton}>
+          <View style={styles.iconContainer}>
+            <Text style={styles.warningIcon}>⚠️</Text>
+          </View>
+          <Text style={styles.dangerText}>{translations.danger}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.gridButton}>
@@ -111,6 +114,32 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#2C2C2E',
   },
+  dangerButton: {
+    backgroundColor: '#2A2A2A',
+    borderRadius: 16,
+    width: '48%',
+    paddingVertical: 25,
+    alignItems: 'center',
+    marginBottom: 16,
+    minHeight: 120,
+    borderWidth: 3,
+    borderColor: '#444444',
+    shadowColor: '#000000',
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 6,
+    elevation: 8,
+  },
+  iconContainer: {
+    marginBottom: 8,
+  },
+  warningIcon: {
+    fontSize: 32,
+    color: '#FFA500',
+    textShadowColor: '#FF6B00',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 3,
+  },
   gridText: {
     color: '#FFFFFF',
     fontSize: 18,
@@ -118,6 +147,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textTransform: 'uppercase',
     lineHeight: 24,
+  },
+  dangerText: {
+    color: '#D4D4D4',
+    fontSize: 16,
+    fontWeight: '800',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    lineHeight: 20,
+    textShadowColor: '#000000',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 3,
+    letterSpacing: 1,
   },
   panicButton: {
     backgroundColor: '#FF9500',
