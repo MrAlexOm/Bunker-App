@@ -16,38 +16,40 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Заголовок BUNKER */}
-      <Text style={styles.headerTitle}>BUNKER</Text>
-      <Text style={styles.headerSubtitle}>ОФЛАЙН ПРИЛОЖЕНИЕ ДЛЯ ВЫЖИВАНИЯ</Text>
+      <View style={styles.scrollContainer}>
+        {/* Заголовок BUNKER */}
+        <Text style={styles.headerTitle}>BUNKER</Text>
+        <Text style={styles.headerSubtitle}>ОФЛАЙН ПРИЛОЖЕНИЕ ДЛЯ ВЫЖИВАНИЯ</Text>
 
-      {/* Огромная кнопка SOS */}
-      <TouchableOpacity style={styles.sosButton}>
-        <Text style={styles.sosText}>{translations.sos}</Text>
-      </TouchableOpacity>
-
-      {/* Сетка 2×2 */}
-      <View style={styles.grid}>
-        <TouchableOpacity style={styles.gridButton}>
-          <Text style={styles.gridText}>{translations.danger}</Text>
+        {/* Огромная кнопка SOS */}
+        <TouchableOpacity style={styles.sosButton}>
+          <Text style={styles.sosText}>{translations.sos}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.gridButton}>
-          <Text style={styles.gridText}>{translations.safety}</Text>
-        </TouchableOpacity>
+        {/* Сетка 2×2 */}
+        <View style={styles.grid}>
+          <TouchableOpacity style={styles.gridButton}>
+            <Text style={styles.gridText}>{translations.danger}</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.gridButton}>
-          <Text style={styles.gridText}>{translations.medical}</Text>
-        </TouchableOpacity>
+          <TouchableOpacity style={styles.gridButton}>
+            <Text style={styles.gridText}>{translations.safety}</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.gridButton}>
-          <Text style={styles.gridText}>{translations.supplies}</Text>
+          <TouchableOpacity style={styles.gridButton}>
+            <Text style={styles.gridText}>{translations.medical}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.gridButton}>
+            <Text style={styles.gridText}>{translations.supplies}</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Кнопка паники */}
+        <TouchableOpacity style={styles.panicButton}>
+          <Text style={styles.panicText}>{translations.panic}</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Кнопка паники */}
-      <TouchableOpacity style={styles.panicButton}>
-        <Text style={styles.panicText}>{translations.panic}</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -56,8 +58,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#0B0B0B',
+  },
+  scrollContainer: {
+    height: '100%',
+    overflowY: 'auto',
     paddingTop: 40,
     paddingHorizontal: 24,
+    paddingBottom: 40,
   },
   headerTitle: {
     color: '#FFFFFF',
