@@ -1,8 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
 
 const HomeScreen = () => {
   console.log("HomeScreen is rendering");
+  
+  // Адаптивные размеры
+  const isSmallScreen = width < 400;
+  const isLargeScreen = width > 500;
   
   const translations = {
     sos: 'SOS',
@@ -65,7 +71,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1A0505',
+    backgroundColor: '#0D0303',
     paddingTop: 40,
     paddingHorizontal: 24,
     position: 'relative',
@@ -76,9 +82,8 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'transparent',
-    opacity: 0.3,
-    background: 'linear-gradient(to bottom, #2A0808 0%, #0D0303 50%, #000000 100%)',
+    backgroundColor: '#0A0202',
+    opacity: 0.4,
   },
   headerTitle: {
     color: '#C0C0C0',
@@ -136,7 +141,7 @@ const styles = StyleSheet.create({
   dangerButton: {
     backgroundColor: '#2A2A2A',
     borderRadius: 16,
-    width: '48%',
+    width: isSmallScreen ? '45%' : '48%',
     paddingVertical: 25,
     alignItems: 'center',
     marginBottom: 16,
@@ -183,7 +188,7 @@ const styles = StyleSheet.create({
   safetyButton: {
     backgroundColor: '#2A2A2A',
     borderRadius: 16,
-    width: '48%',
+    width: isSmallScreen ? '45%' : '48%',
     paddingVertical: 25,
     alignItems: 'flex-start',
     marginBottom: 16,
