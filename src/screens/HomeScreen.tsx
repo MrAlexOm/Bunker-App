@@ -37,10 +37,12 @@ const HomeScreen = () => {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.safetyButton}>
-          <View style={styles.safetyIconContainer}>
-            <Text style={styles.shieldIcon}>🛡️</Text>
+          <View style={styles.safetyContent}>
+            <View style={styles.safetyIconContainer}>
+              <Text style={styles.shieldIcon}>🛡️</Text>
+            </View>
+            <Text style={styles.safetyText}>{translations.safety}</Text>
           </View>
-          <Text style={styles.safetyText}>{translations.safety}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.gridButton}>
@@ -183,7 +185,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     width: '48%',
     paddingVertical: 25,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginBottom: 16,
     minHeight: 120,
     borderWidth: 3,
@@ -194,12 +196,17 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 8,
   },
+  safetyContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    width: '100%',
+  },
   safetyIconContainer: {
-    alignSelf: 'flex-start',
-    marginBottom: 8,
+    marginRight: 10,
   },
   shieldIcon: {
-    fontSize: 28,
+    fontSize: 22,
     color: '#C0C0C0',
     textShadowColor: '#666666',
     textShadowOffset: { width: 2, height: 2 },
