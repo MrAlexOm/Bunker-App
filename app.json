@@ -15,7 +15,7 @@
     "ios": {
       "bundleIdentifier": "com.bunker.app",
       "supportsTablet": true,
-      "icon": "./assets/ios-icon_app — .png",
+      "icon": "./assets/icon.png",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
