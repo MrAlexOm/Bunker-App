@@ -57,7 +57,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1A1A1A',
+    backgroundColor: '#2D0A0A',
     paddingTop: 40,
     paddingHorizontal: 24,
     position: 'relative',
@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: '#2C2C2C',
-    opacity: 0.7,
+    backgroundColor: '#4A1A1A',
+    opacity: 0.6,
   },
   headerTitle: {
     color: '#C0C0C0',
