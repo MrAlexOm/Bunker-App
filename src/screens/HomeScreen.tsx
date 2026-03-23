@@ -7,8 +7,15 @@ const HomeScreen = () => {
   console.log("HomeScreen is rendering");
   
   // Адаптивные размеры
+  const { width, height } = Dimensions.get('window');
   const isSmallScreen = width < 400;
   const isLargeScreen = width > 500;
+  
+  // Динамические стили
+  const dynamicStyles = {
+    dangerButtonWidth: isSmallScreen ? '45%' : '48%',
+    safetyButtonWidth: isSmallScreen ? '45%' : '48%',
+  };
   
   const translations = {
     sos: 'SOS',
@@ -35,14 +42,14 @@ const HomeScreen = () => {
 
       {/* Сетка 2×2 */}
       <View style={styles.grid}>
-        <TouchableOpacity style={styles.dangerButton}>
+        <TouchableOpacity style={[styles.dangerButton, { width: dynamicStyles.dangerButtonWidth }]}>
           <View style={styles.iconContainer}>
             <Text style={styles.warningIcon}>⚠️</Text>
           </View>
           <Text style={styles.dangerText}>{translations.danger}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.safetyButton}>
+        <TouchableOpacity style={[styles.safetyButton, { width: dynamicStyles.safetyButtonWidth }]}>
           <View style={styles.safetyContent}>
             <View style={styles.safetyIconContainer}>
               <Text style={styles.shieldIcon}>🛡️</Text>
@@ -141,7 +148,6 @@ const styles = StyleSheet.create({
   dangerButton: {
     backgroundColor: '#2A2A2A',
     borderRadius: 16,
-    width: isSmallScreen ? '45%' : '48%',
     paddingVertical: 25,
     alignItems: 'center',
     marginBottom: 16,
@@ -188,7 +194,6 @@ const styles = StyleSheet.create({
   safetyButton: {
     backgroundColor: '#2A2A2A',
     borderRadius: 16,
-    width: isSmallScreen ? '45%' : '48%',
     paddingVertical: 25,
     alignItems: 'flex-start',
     marginBottom: 16,
