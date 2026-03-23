@@ -63,8 +63,11 @@ const HomeScreen = () => {
           <Text style={styles.dangerText}>{translations.medical}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.gridButton}>
-          <Text style={styles.gridText}>{translations.supplies}</Text>
+        <TouchableOpacity style={[styles.dangerButton, { width: dynamicStyles.dangerButtonWidth }]}>
+          <View style={styles.iconContainer}>
+            <Text style={styles.suppliesIcon}>📦</Text>
+          </View>
+          <Text style={styles.dangerText}>{translations.supplies}</Text>
         </TouchableOpacity>
       </View>
 
@@ -176,6 +179,13 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: '#FF6B6B',
     textShadowColor: '#CC0000',
+    textShadowOffset: { width: 3, height: 3 },
+    textShadowRadius: 4,
+  },
+  suppliesIcon: {
+    fontSize: 40,
+    color: '#8B8B00',
+    textShadowColor: '#4B4B00',
     textShadowOffset: { width: 3, height: 3 },
     textShadowRadius: 4,
   },
