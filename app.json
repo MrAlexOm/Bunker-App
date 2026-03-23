@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "backgroundColor": "#0B0B0B",
     "splash": {
-      "image": "./assets/icon.png",
+      "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#0B0B0B"
     },
@@ -22,7 +22,9 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#0B0B0B",
-        "foregroundImage": "./assets/icon.png"
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.al0306.bunker",
