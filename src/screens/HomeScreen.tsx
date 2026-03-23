@@ -24,7 +24,7 @@ const HomeScreen = () => {
     medical: 'Первая помощь',
     supplies: 'Запасы',
     scenarios: 'Сценарии',
-    panic: 'Я в панике'
+    panic: 'ЧАТ ВЫЖИВШИЕ'
   };
 
   return (
@@ -73,7 +73,10 @@ const HomeScreen = () => {
 
       {/* Кнопка паники */}
       <TouchableOpacity style={styles.panicButton}>
-        <Text style={styles.panicText}>{translations.panic}</Text>
+        <View style={styles.panicContent}>
+          <Text style={styles.panicIcon}>📡</Text>
+          <Text style={styles.panicText}>{translations.panic}</Text>
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -251,6 +254,24 @@ const styles = StyleSheet.create({
     minHeight: 60,
     borderWidth: 3,
     borderColor: '#FFB84D',
+    shadowColor: '#FF9500',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.6,
+    shadowRadius: 15,
+    elevation: 12,
+  },
+  panicContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  panicIcon: {
+    fontSize: 28,
+    color: '#FFFFFF',
+    marginRight: 10,
+    textShadowColor: '#FF6B00',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 3,
   },
   panicText: {
     color: '#FFFFFF',
