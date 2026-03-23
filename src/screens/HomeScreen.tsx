@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 
 const HomeScreen = () => {
   console.log("HomeScreen is rendering");
+  const navigation = useNavigation();
   
   // Адаптивные размеры
   const { width, height } = Dimensions.get('window');
@@ -72,7 +74,7 @@ const HomeScreen = () => {
       </View>
 
       {/* Кнопка паники */}
-      <TouchableOpacity style={styles.panicButton}>
+      <TouchableOpacity style={styles.panicButton} onPress={() => navigation.navigate('Chat')}>
         <View style={styles.panicContent}>
           <Text style={styles.panicIcon}>📡</Text>
           <Text style={styles.panicText}>{translations.panic}</Text>

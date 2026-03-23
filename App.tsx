@@ -14,6 +14,7 @@ import ScenariosScreen from './src/screens/ScenariosScreen';
 import PanicScreen from './src/screens/PanicScreen';
 import SafetyScreen from './src/screens/SafetyScreen';
 import SOSScreen from './src/screens/SOSScreen';
+import ChatScreen from './src/screens/ChatScreen';
 // import LoadingScreen from './src/screens/LoadingScreen';
 
 const Stack = createNativeStackNavigator();
@@ -26,6 +27,7 @@ const AppNavigator = () => (
     }}
   >
     <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Chat" component={ChatScreen} />
   </Stack.Navigator>
 );
 
