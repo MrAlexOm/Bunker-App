@@ -16,6 +16,9 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      {/* Градиентный слой для плавного перехода */}
+      <View style={styles.gradientOverlay} />
+      
       {/* Заголовок BUNKER */}
       <Text style={styles.headerTitle}>BUNKER</Text>
 
@@ -60,9 +63,20 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B0B0B',
+    backgroundColor: '#1A0505',
     paddingTop: 40,
     paddingHorizontal: 24,
+    position: 'relative',
+  },
+  gradientOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'transparent',
+    opacity: 0.3,
+    background: 'linear-gradient(to bottom, #2A0808 0%, #0D0303 50%, #000000 100%)',
   },
   headerTitle: {
     color: '#C0C0C0',
