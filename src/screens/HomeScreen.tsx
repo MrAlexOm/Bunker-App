@@ -19,7 +19,7 @@ const HomeScreen = () => {
   
   const translations = {
     sos: 'SOS',
-    danger: 'В опасности',
+    danger: 'Я В ОПАСНОСТИ',
     safety: 'Найти укрытие',
     medical: 'Первая помощь',
     supplies: 'Запасы',
