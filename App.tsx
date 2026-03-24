@@ -28,6 +28,7 @@ const AppNavigator = () => (
   >
     <Stack.Screen name="Home" component={HomeScreen} />
     <Stack.Screen name="Panic" component={PanicScreen} />
+    <Stack.Screen name="Chat" component={ChatScreen} />
   </Stack.Navigator>
 );
 
