@@ -17,12 +17,17 @@ const PanicScreen = () => {
     </Text>
 
     <Text style={{ color: 'white', marginTop: 20 }}>
-      TEST MESSAGE 1
+      DEBUG: messages = {JSON.stringify(messages)}
     </Text>
 
-    <Text style={{ color: 'white', marginTop: 10 }}>
-      TEST MESSAGE 2
-    </Text>
+    {messages.map((msg, index) => {
+      console.log('Mapping message:', msg, 'index:', index);
+      return (
+        <Text key={msg.id} style={{ color: 'white', marginTop: 10 }}>
+          {index}: {msg.text}
+        </Text>
+      );
+    })}
 
   </View>
 );
