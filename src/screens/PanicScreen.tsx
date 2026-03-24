@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   messagesContainer: {
-    flex: 1,
+    height: 300, // ФИКСИРОВАННАЯ ВЫСОТА
     paddingHorizontal: 20,
     backgroundColor: '#FF0000', // ВРЕМЕННО
     borderWidth: 2,
