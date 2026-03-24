@@ -13,7 +13,7 @@ const PanicScreen = () => {
   console.log('🔥🔥🔥 PanicScreen RETURN JSX');
 
   return (
-    <View style={styles.container}>
+    <View style={{ flex: 1, backgroundColor: '#0B0B0B' }}>
       <Text style={styles.title}>ЧАТ ВЫЖИВШИЕ</Text>
       
       <ScrollView style={styles.messagesContainer}>
@@ -27,7 +27,7 @@ const PanicScreen = () => {
                 message.mine ? styles.myMessage : styles.otherMessage
               ]}
             >
-              <Text style={styles.messageText}>{message.text}</Text>
+              <Text style={{ color: 'white' }}>{message.text}</Text>
             </View>
           );
         })}
@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   messagesContainer: {
-    height: 300, // ФИКСИРОВАННАЯ ВЫСОТА
-    paddingHorizontal: 20,
+    flex: 1,
+    padding: 20,
   },
   messageContainer: {
     maxWidth: '75%',
     padding: 12,
     borderRadius: 16,
-    marginBottom: 10,
+    marginVertical: 5,
   },
   myMessage: {
     alignSelf: 'flex-end',
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   otherMessage: {
     alignSelf: 'flex-start',
-    backgroundColor: '#1A1A1A',
+    backgroundColor: '#333',
   },
   messageText: {
     color: '#FFFFFF',
