@@ -7,30 +7,17 @@ const PanicScreen = () => {
     { id: '2', text: 'Я здесь', mine: true }
   ]);
 
-  // Отладочная информация
-  console.log('PanicScreen render - messages:', messages);
-  console.log('PanicScreen render - messages.length:', messages.length);
-
   return (
     <View style={styles.container}>
       {/* Заголовок */}
       <Text style={styles.title}>ЧАТ ВЫЖИВШИЕ</Text>
       
-      {/* Отладочная информация */}
-      <View style={styles.debugContainer}>
-        <Text style={styles.debugText}>🐛 DEBUG INFO:</Text>
-        <Text style={styles.debugText}>Messages count: {messages.length}</Text>
-        <Text style={styles.debugText}>Screen: PanicScreen</Text>
-        {messages.map((msg, index) => (
-          <Text key={index} style={styles.debugText}>
-            Msg{index}: "{msg.text}" ({msg.mine ? 'mine' : 'other'})
-          </Text>
-        ))}
-      </View>
-      
       {/* Сообщения */}
       <View style={styles.messagesWrapper}>
-        <ScrollView style={styles.messagesContainer}>
+        <ScrollView 
+          style={styles.messagesContainer}
+          contentContainerStyle={styles.messagesContent}
+        >
           {messages.length === 0 ? (
             <Text style={styles.emptyText}>❌ Сообщений нет</Text>
           ) : (
@@ -65,25 +52,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
   },
-  debugContainer: {
-    backgroundColor: '#1A1A1A',
-    padding: 10,
-    margin: 10,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#FF3B30',
-  },
-  debugText: {
-    color: '#FF6B6B',
-    fontSize: 12,
-    marginBottom: 2,
-  },
   messagesWrapper: {
     flex: 1,
-    paddingHorizontal: 20,
   },
   messagesContainer: {
     flex: 1,
+  },
+  messagesContent: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
   messageContainer: {
     maxWidth: '75%',
