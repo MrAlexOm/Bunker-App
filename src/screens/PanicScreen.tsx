@@ -10,23 +10,22 @@ const PanicScreen = () => {
   console.log('PanicScreen render, messages:', messages);
 
   return (
-    <View style={styles.container}>
-      
-      <Text style={styles.title}>📡 ЧАТ ВЫЖИВШИЕ</Text>
+  <View style={{ flex: 1, backgroundColor: '#0B0B0B', padding: 20 }}>
+    
+    <Text style={{ color: 'red', fontSize: 20 }}>
+      📡 ЧАТ ВЫЖИВШИЕ
+    </Text>
 
-      <ScrollView 
-        style={styles.chatContainer}
-        contentContainerStyle={styles.chatContent}
-      >
-        {messages.map((msg) => (
-          <View key={msg.id} style={styles.message}>
-            <Text style={styles.messageText}>{msg.text}</Text>
-          </View>
-        ))}
-      </ScrollView>
+    <Text style={{ color: 'white', marginTop: 20 }}>
+      TEST MESSAGE 1
+    </Text>
 
-    </View>
-  );
+    <Text style={{ color: 'white', marginTop: 10 }}>
+      TEST MESSAGE 2
+    </Text>
+
+  </View>
+);
 };
 
 const styles = StyleSheet.create({
