@@ -80,6 +80,14 @@ const HomeScreen = () => {
           <Text style={styles.panicText}>{translations.panic}</Text>
         </View>
       </TouchableOpacity>
+
+      {/* Кнопка чата */}
+      <TouchableOpacity style={styles.chatButton} onPress={() => navigation.navigate('Chat')}>
+        <View style={styles.chatContent}>
+          <Text style={styles.chatIcon}>💬</Text>
+          <Text style={styles.chatText}>Bluetooth Чат</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -276,6 +284,41 @@ const styles = StyleSheet.create({
     textShadowRadius: 3,
   },
   panicText: {
+    color: '#FFFFFF',
+    fontSize: 28,
+    fontWeight: '800',
+    textTransform: 'uppercase',
+    letterSpacing: 2,
+    textAlign: 'center',
+  },
+  chatButton: {
+    backgroundColor: '#007AFF',
+    borderRadius: 16,
+    paddingVertical: 17,
+    alignItems: 'center',
+    minHeight: 60,
+    borderWidth: 3,
+    borderColor: '#5AC8FA',
+    shadowColor: '#007AFF',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.6,
+    shadowRadius: 15,
+    elevation: 12,
+  },
+  chatContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  chatIcon: {
+    fontSize: 28,
+    color: '#FFFFFF',
+    marginRight: 10,
+    textShadowColor: '#0056CC',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 3,
+  },
+  chatText: {
     color: '#FFFFFF',
     fontSize: 28,
     fontWeight: '800',
