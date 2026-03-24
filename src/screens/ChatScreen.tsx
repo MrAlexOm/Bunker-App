@@ -13,7 +13,6 @@ import {
   Modal,
   Dimensions
 } from 'react-native';
-import { useLanguage } from '../contexts/LanguageContext';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -32,7 +31,6 @@ interface Chat {
 }
 
 const ChatScreen = () => {
-  const { t, language } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const [currentChat, setCurrentChat] = useState<Chat | null>(null);
