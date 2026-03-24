@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -15,6 +15,7 @@ const PanicScreen = () => {
   ]);
 
   const [input, setInput] = useState('');
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const sendMessage = () => {
     if (!input.trim()) return;
@@ -27,103 +28,149 @@ const PanicScreen = () => {
 
     setMessages((prev) => [...prev, newMessage]);
     setInput('');
+
+    setTimeout(() => {
+      scrollViewRef.current?.scrollToEnd({ animated: true });
+    },100);
   };
 
   return (
     <View style={styles.container}>
       
-      <Text style={styles.title}>📡 ЧАТ ВЫЖИВШИЕ</Text>
+      {/* HEADER */}
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>📡 ЧАТ ВЫЖИВШИЕ</Text>
 
-      <ScrollView 
+        {/* Bluetooth кнопка (пока заглушка) */}
+        <TouchableOpacity style={styles.bluetoothBtn}>
+          <Text style={styles.bluetoothText}>🔵</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* CHAT */}
+      <ScrollView
+        ref={scrollViewRef}
         style={styles.chat}
-        contentContainerStyle={{ paddingBottom: 20 }}
+        contentContainerStyle={styles.chatContent}
       >
         {messages.map((msg) => (
-          <View 
-            key={msg.id} 
+          <View
+            key={msg.id}
             style={[
               styles.message,
-              msg.isMine ? styles.myMessage : styles.otherMessage
+              msg.isMine ? styles.myMessage : styles.otherMessage,
             ]}
           >
-            <Text style={styles.text}>{msg.text}</Text>
+            <Text style={styles.messageText}>{msg.text}</Text>
           </View>
         ))}
       </ScrollView>
 
+      {/* INPUT */}
       <View style={styles.inputRow}>
         <TextInput
           style={styles.input}
-          placeholder="Написать..."
+          placeholder="Сообщение..."
           placeholderTextColor="#888"
           value={input}
           onChangeText={setInput}
         />
 
-        <TouchableOpacity style={styles.button} onPress={sendMessage}>
-          <Text style={styles.buttonText}>→</Text>
+        <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
+          <Text style={styles.sendText}>→</Text>
         </TouchableOpacity>
       </View>
-
     </View>
   );
 };
+
+export default PanicScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#0B0B0B',
-    padding: 15,
   },
-  title: {
+
+  header: {
+    paddingTop: 50,
+    paddingBottom: 10,
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  headerTitle: {
     color: '#FF3B30',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
   },
+
+  bluetoothBtn: {
+    padding: 8,
+  },
+
+  bluetoothText: {
+    fontSize: 18,
+  },
+
   chat: {
     flex: 1,
+    paddingHorizontal: 10,
   },
+
+  chatContent: {
+    paddingBottom: 20,
+  },
+
   message: {
     maxWidth: '75%',
     padding: 10,
     borderRadius: 10,
-    marginBottom: 8,
+    marginVertical: 5,
   },
+
   myMessage: {
     alignSelf: 'flex-end',
     backgroundColor: '#FF3B30',
   },
+
   otherMessage: {
     alignSelf: 'flex-start',
     backgroundColor: '#1A1A1A',
   },
-  text: {
-    color: '#fff',
-    fontSize: 16,
+
+  messageText: {
+    color: '#FFFFFF',
+    fontSize: 15,
   },
+
   inputRow: {
     flexDirection: 'row',
-    marginTop: 10,
+    padding: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#1A1A1A',
   },
+
   input: {
     flex: 1,
     backgroundColor: '#1A1A1A',
-    color: '#fff',
+    color: '#FFFFFF',
     padding: 10,
     borderRadius: 10,
   },
-  button: {
+
+  sendButton: {
     marginLeft: 10,
     backgroundColor: '#FF3B30',
     paddingHorizontal: 15,
     justifyContent: 'center',
     borderRadius: 10,
   },
-  buttonText: {
-    color: '#fff',
+
+  sendText: {
+    color: '#FFFFFF',
     fontSize: 18,
   },
 });
-
-export default PanicScreen;
