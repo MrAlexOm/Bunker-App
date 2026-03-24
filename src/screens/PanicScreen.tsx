@@ -7,24 +7,44 @@ const PanicScreen = () => {
     { id: '2', text: 'Я здесь', mine: true }
   ]);
 
+  // Отладочная информация
+  console.log('PanicScreen render - messages:', messages);
+  console.log('PanicScreen render - messages.length:', messages.length);
+
   return (
     <View style={styles.container}>
       {/* Заголовок */}
       <Text style={styles.title}>ЧАТ ВЫЖИВШИЕ</Text>
       
+      {/* Отладочная информация */}
+      <View style={styles.debugContainer}>
+        <Text style={styles.debugText}>🐛 DEBUG INFO:</Text>
+        <Text style={styles.debugText}>Messages count: {messages.length}</Text>
+        <Text style={styles.debugText}>Screen: PanicScreen</Text>
+        {messages.map((msg, index) => (
+          <Text key={index} style={styles.debugText}>
+            Msg{index}: "{msg.text}" ({msg.mine ? 'mine' : 'other'})
+          </Text>
+        ))}
+      </View>
+      
       {/* Сообщения */}
       <ScrollView style={styles.messagesContainer}>
-        {messages.map((message) => (
-          <View 
-            key={message.id} 
-            style={[
-              styles.messageContainer,
-              message.mine ? styles.myMessage : styles.otherMessage
-            ]}
-          >
-            <Text style={styles.messageText}>{message.text}</Text>
-          </View>
-        ))}
+        {messages.length === 0 ? (
+          <Text style={styles.emptyText}>❌ Сообщений нет</Text>
+        ) : (
+          messages.map((message) => (
+            <View 
+              key={message.id} 
+              style={[
+                styles.messageContainer,
+                message.mine ? styles.myMessage : styles.otherMessage
+              ]}
+            >
+              <Text style={styles.messageText}>{message.text}</Text>
+            </View>
+          ))
+        )}
       </ScrollView>
     </View>
   );
@@ -42,6 +62,19 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 20,
+  },
+  debugContainer: {
+    backgroundColor: '#1A1A1A',
+    padding: 10,
+    margin: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#FF3B30',
+  },
+  debugText: {
+    color: '#FF6B6B',
+    fontSize: 12,
+    marginBottom: 2,
   },
   messagesContainer: {
     flex: 1,
@@ -65,6 +98,12 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     lineHeight: 20,
+  },
+  emptyText: {
+    color: '#FF6B6B',
+    fontSize: 18,
+    textAlign: 'center',
+    marginTop: 50,
   },
 });
 
