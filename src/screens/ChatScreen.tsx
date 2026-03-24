@@ -1,41 +1,31 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 const ChatScreen = () => {
-  // Фейковый список устройств
-  const fakeDevices = [
-    { name: 'Устройство рядом', distance: '5м', type: 'device' },
-    { name: 'Неизвестный', distance: '12м', type: 'unknown' },
-    { name: 'Выживший', distance: '20м', type: 'survivor' },
-  ];
+  const [messages, setMessages] = useState([
+    { id: '1', text: 'Есть кто рядом?', mine: false },
+    { id: '2', text: 'Я здесь', mine: true }
+  ]);
 
   return (
     <View style={styles.container}>
       {/* Заголовок */}
       <Text style={styles.title}>ЧАТ ВЫЖИВШИЕ</Text>
       
-      {/* Статус */}
-      <Text style={styles.status}>🔍 Поиск устройств...</Text>
-      
-      {/* Список устройств */}
-      <ScrollView style={styles.deviceList}>
-        {fakeDevices.map((device, index) => (
-          <View key={index} style={styles.deviceCard}>
-            <View style={styles.deviceInfo}>
-              <Text style={styles.deviceName}>📱 {device.name}</Text>
-              <Text style={styles.deviceDistance}>📡 {device.distance}</Text>
-            </View>
-            <TouchableOpacity style={styles.connectButton}>
-              <Text style={styles.connectButtonText}>Подключиться</Text>
-            </TouchableOpacity>
+      {/* Сообщения */}
+      <ScrollView style={styles.messagesContainer}>
+        {messages.map((message) => (
+          <View 
+            key={message.id} 
+            style={[
+              styles.messageContainer,
+              message.mine ? styles.myMessage : styles.otherMessage
+            ]}
+          >
+            <Text style={styles.messageText}>{message.text}</Text>
           </View>
         ))}
       </ScrollView>
-      
-      {/* Кнопка обновить */}
-      <TouchableOpacity style={styles.refreshButton}>
-        <Text style={styles.refreshButtonText}>🔄 Обновить поиск</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -53,60 +43,28 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
   },
-  status: {
-    color: '#CCCCCC',
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  deviceList: {
+  messagesContainer: {
     flex: 1,
     paddingHorizontal: 20,
   },
-  deviceCard: {
+  messageContainer: {
+    maxWidth: '75%',
+    padding: 12,
+    borderRadius: 16,
+    marginBottom: 10,
+  },
+  myMessage: {
+    alignSelf: 'flex-end',
+    backgroundColor: '#FF3B30',
+  },
+  otherMessage: {
+    alignSelf: 'flex-start',
     backgroundColor: '#1A1A1A',
-    borderRadius: 15,
-    padding: 15,
-    marginBottom: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
   },
-  deviceInfo: {
-    flex: 1,
-  },
-  deviceName: {
+  messageText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: '500',
-    marginBottom: 5,
-  },
-  deviceDistance: {
-    color: '#CCCCCC',
-    fontSize: 14,
-  },
-  connectButton: {
-    backgroundColor: '#FF9500',
-    borderRadius: 8,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-  },
-  connectButtonText: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    fontWeight: '500',
-  },
-  refreshButton: {
-    backgroundColor: '#2A2A2A',
-    borderRadius: 12,
-    padding: 15,
-    margin: 20,
-    alignItems: 'center',
-  },
-  refreshButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '500',
+    lineHeight: 20,
   },
 });
 
