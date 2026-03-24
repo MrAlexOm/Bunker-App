@@ -14,44 +14,49 @@ const PanicScreen = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#0B0B0B' }}>
-      <Text style={styles.title}>ЧАТ ВЫЖИВШИЕ</Text>
       
-      <ScrollView style={styles.messagesContainer}>
-        {messages.map((message) => {
-          console.log('🔥🔥🔥 Mapping message:', message);
-          return (
-            <View 
-              key={message.id} 
-              style={[
-                styles.messageContainer,
-                message.mine ? styles.myMessage : styles.otherMessage
-              ]}
-            >
-              <Text style={{ color: 'white' }}>{message.text}</Text>
-            </View>
-          );
-        })}
-      </ScrollView>
+      {/* HEADER */}
+      <View>
+        <Text style={styles.title}>ЧАТ ВЫЖИВШИЕ</Text>
+      </View>
+
+      {/* CHAT CONTAINER */}
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            padding: 20
+          }}
+        >
+          {messages.map((message) => {
+            console.log('🔥🔥🔥 Mapping message:', message);
+            return (
+              <View 
+                key={message.id} 
+                style={[
+                  styles.messageContainer,
+                  message.mine ? styles.myMessage : styles.otherMessage
+                ]}
+              >
+                <Text style={{ color: 'white' }}>{message.text}</Text>
+              </View>
+            );
+          })}
+        </ScrollView>
+      </View>
+
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0B0B0B',
-    paddingTop: 40,
-  },
   title: {
     color: '#FFFFFF',
     fontSize: 24,
     fontWeight: '600',
     textAlign: 'center',
     marginBottom: 20,
-  },
-  messagesContainer: {
-    flex: 1,
-    padding: 20,
+    paddingTop: 40,
   },
   messageContainer: {
     maxWidth: '75%',
@@ -66,11 +71,6 @@ const styles = StyleSheet.create({
   otherMessage: {
     alignSelf: 'flex-start',
     backgroundColor: '#333',
-  },
-  messageText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    lineHeight: 20,
   },
 });
 
