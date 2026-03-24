@@ -34,7 +34,7 @@ const AppNavigator = () => (
 
 export default function App() {
   console.log("App is rendering");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     console.log("App useEffect - checking for errors");
@@ -47,7 +47,7 @@ export default function App() {
       console.log("Environment check:", { testStorage, testFetch });
     } catch (e) {
       console.error("Environment check failed:", e);
-      setError(e);
+      setError(e as Error);
     }
   }, []);
 

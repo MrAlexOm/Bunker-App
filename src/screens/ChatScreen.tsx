@@ -376,7 +376,101 @@ const styles = StyleSheet.create({
   messageText: {
     color: '#FFFFFF',
     fontSize: 16,
-    lineHeight: 20,
+  },
+  messageTime: {
+    fontSize: 10,
+    color: 'rgba(255,255,255,0.7)',
+    marginTop: 4,
+    textAlign: 'right',
+  },
+  chatListButton: {
+    backgroundColor: '#151515',
+    paddingVertical: 12,
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#2A2A2A',
+    borderBottomWidth: 1,
+    borderBottomColor: '#2A2A2A',
+  },
+  chatListButtonText: {
+    color: '#FFD60A',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  chatListPanel: {
+    backgroundColor: '#151515',
+    borderBottomWidth: 1,
+    borderBottomColor: '#2A2A2A',
+    maxHeight: 300,
+  },
+  chatListScroll: {
+    maxHeight: 300,
+  },
+  chatListItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#2A2A2A',
+  },
+  chatListItemLeft: {
+    flex: 1,
+  },
+  chatListName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 4,
+  },
+  chatListPreview: {
+    fontSize: 12,
+    color: '#888',
+  },
+  chatListTime: {
+    fontSize: 11,
+    color: '#888',
+    marginLeft: 8,
+  },
+  noChatsText: {
+    color: '#888',
+    textAlign: 'center',
+    padding: 20,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    backgroundColor: '#151515',
+    borderTopWidth: 1,
+    borderTopColor: '#2A2A2A',
+  },
+  input: {
+    flex: 1,
+    backgroundColor: '#2A2A2A',
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    color: '#FFFFFF',
+    fontSize: 16,
+    maxHeight: 100,
+  },
+  sendButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#FF3B30',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 8,
+  },
+  sendButtonDisabled: {
+    backgroundColor: '#555',
+  },
+  sendButtonText: {
+    fontSize: 22,
   },
 });
 
