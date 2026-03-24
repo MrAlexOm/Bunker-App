@@ -1,48 +1,61 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 const PanicScreen = () => {
-  console.log('🔥🔥🔥 PanicScreen RENDER START 🔥🔥🔥');
-  
-  const [messages] = useState([
-    { id: '1', text: 'Есть кто рядом?', mine: false },
-    { id: '2', text: 'Я здесь', mine: true }
-  ]);
+  const messages = [
+    { id: '1', text: '🚨 SOS! Есть кто рядом?' },
+    { id: '2', text: 'Я в укрытии, 2 человека' },
+  ];
 
-  console.log('🔥🔥🔥 PanicScreen MESSAGES:', messages);
-  console.log('🔥🔥🔥 PanicScreen RETURN JSX');
+  console.log('PanicScreen render, messages:', messages);
 
   return (
-  <View style={{ flex: 1, backgroundColor: 'red' }}>
-    <Text style={{ color: 'white', fontSize: 30 }}>
-      PANIC SCREEN WORKS
-    </Text>
-  </View>
-);
+    <View style={styles.container}>
+      
+      <Text style={styles.title}>📡 ЧАТ ВЫЖИВШИЕ</Text>
+
+      <ScrollView 
+        style={styles.chatContainer}
+        contentContainerStyle={styles.chatContent}
+      >
+        {messages.map((msg) => (
+          <View key={msg.id} style={styles.message}>
+            <Text style={styles.messageText}>{msg.text}</Text>
+          </View>
+        ))}
+      </ScrollView>
+
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#0B0B0B',
+    padding: 20,
+  },
   title: {
-    color: '#FFFFFF',
-    fontSize: 24,
-    fontWeight: '600',
-    textAlign: 'center',
-    marginBottom: 20,
-    paddingTop: 40,
+    color: '#FF3B30',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
-  messageContainer: {
-    maxWidth: '75%',
+  chatContainer: {
+    flex: 1, // 🔥 ВАЖНО
+  },
+  chatContent: {
+    paddingBottom: 20,
+  },
+  message: {
+    backgroundColor: '#1A1A1A',
     padding: 12,
-    borderRadius: 16,
-    marginVertical: 5,
+    borderRadius: 10,
+    marginBottom: 10,
   },
-  myMessage: {
-    alignSelf: 'flex-end',
-    backgroundColor: '#FF3B30',
-  },
-  otherMessage: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#333',
+  messageText: {
+    color: '#FFFFFF',
+    fontSize: 16,
   },
 });
 
