@@ -16,7 +16,14 @@ const PanicScreen = () => {
     <View style={styles.container}>
       <Text style={styles.title}>ЧАТ ВЫЖИВШИЕ</Text>
       
+      {/* ВРЕМЕННЫЙ ТЕСТОВЫЙ ЭЛЕМЕНТ */}
+      <View style={styles.testBox}>
+        <Text style={styles.testText}>🔥 ТЕСТОВЫЙ БЛОК 🔥</Text>
+      </View>
+      
       <ScrollView style={styles.messagesContainer}>
+        <Text style={styles.testText}>📱 ВНУТРИ SCROLLVIEW 📱</Text>
+        
         {messages.map((message) => {
           console.log('🔥 Mapping message:', message);
           return (
@@ -28,10 +35,18 @@ const PanicScreen = () => {
               ]}
             >
               <Text style={styles.messageText}>{message.text}</Text>
+              <Text style={styles.testText}>🔥 МЕССЕДЖ ВИДЕН 🔥</Text>
             </View>
           );
         })}
+        
+        <Text style={styles.testText}>📱 КОНЕЦ SCROLLVIEW 📱</Text>
       </ScrollView>
+      
+      {/* ВРЕМЕННЫЙ ТЕСТОВЫЙ ЭЛЕМЕНТ */}
+      <View style={styles.testBox}>
+        <Text style={styles.testText}>🔥 НИЖНИЙ БЛОК 🔥</Text>
+      </View>
     </View>
   );
 };
@@ -76,6 +91,17 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     lineHeight: 20,
+  },
+  testBox: {
+    backgroundColor: '#FF00FF',
+    padding: 20,
+    margin: 10,
+    alignItems: 'center',
+  },
+  testText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
