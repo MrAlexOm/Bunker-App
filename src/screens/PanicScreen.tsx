@@ -10,8 +10,8 @@ import {
 
 const PanicScreen = () => {
   const [messages, setMessages] = useState([
-    { id: '1', text: '🚨 SOS! Есть кто рядом?' },
-    { id: '2', text: 'Я в укрытии, 2 человека' },
+    { id: '1', text: '🚨 SOS! Есть кто рядом?', isMine: false },
+    { id: '2', text: 'Я в укрытии, 2 человека', isMine: true },
   ]);
 
   const [input, setInput] = useState('');
@@ -22,6 +22,7 @@ const PanicScreen = () => {
     const newMessage = {
       id: Date.now().toString(),
       text: input,
+      isMine: true,
     };
 
     setMessages((prev) => [...prev, newMessage]);
@@ -33,29 +34,21 @@ const PanicScreen = () => {
       
       <Text style={styles.title}>📡 ЧАТ ВЫЖИВШИЕ</Text>
 
-      <Text style={{ color: 'white', marginBottom: 10 }}>
-        DEBUG: Messages count: {messages.length}
-      </Text>
-
       <ScrollView 
         style={styles.chat}
         contentContainerStyle={{ paddingBottom: 20 }}
       >
-        <Text style={{ color: 'yellow', marginBottom: 10 }}>
-          INSIDE SCROLLVIEW
-        </Text>
-        
-        {messages.map((msg, index) => (
-          <View key={msg.id} style={styles.message}>
-            <Text style={styles.text}>
-              {index}: {msg.text}
-            </Text>
+        {messages.map((msg) => (
+          <View 
+            key={msg.id} 
+            style={[
+              styles.message,
+              msg.isMine ? styles.myMessage : styles.otherMessage
+            ]}
+          >
+            <Text style={styles.text}>{msg.text}</Text>
           </View>
         ))}
-        
-        <Text style={{ color: 'yellow', marginTop: 10 }}>
-          END OF SCROLLVIEW
-        </Text>
       </ScrollView>
 
       <View style={styles.inputRow}>
@@ -92,10 +85,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   message: {
-    backgroundColor: '#1A1A1A',
+    maxWidth: '75%',
     padding: 10,
     borderRadius: 10,
     marginBottom: 8,
+  },
+  myMessage: {
+    alignSelf: 'flex-end',
+    backgroundColor: '#FF3B30',
+  },
+  otherMessage: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#1A1A1A',
   },
   text: {
     color: '#fff',
