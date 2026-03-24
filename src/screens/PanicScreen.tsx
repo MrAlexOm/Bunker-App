@@ -13,40 +13,12 @@ const PanicScreen = () => {
   console.log('🔥🔥🔥 PanicScreen RETURN JSX');
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#0B0B0B' }}>
-      
-      {/* HEADER */}
-      <View>
-        <Text style={styles.title}>ЧАТ ВЫЖИВШИЕ</Text>
-      </View>
-
-      {/* CHAT CONTAINER */}
-      <View style={{ flex: 1 }}>
-        <ScrollView
-          contentContainerStyle={{
-            flexGrow: 1,
-            padding: 20
-          }}
-        >
-          {messages.map((message) => {
-            console.log('🔥🔥🔥 Mapping message:', message);
-            return (
-              <View 
-                key={message.id} 
-                style={[
-                  styles.messageContainer,
-                  message.mine ? styles.myMessage : styles.otherMessage
-                ]}
-              >
-                <Text style={{ color: 'white' }}>{message.text}</Text>
-              </View>
-            );
-          })}
-        </ScrollView>
-      </View>
-
-    </View>
-  );
+  <View style={{ flex: 1, backgroundColor: 'red' }}>
+    <Text style={{ color: 'white', fontSize: 30 }}>
+      PANIC SCREEN WORKS
+    </Text>
+  </View>
+);
 };
 
 const styles = StyleSheet.create({
