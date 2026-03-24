@@ -31,7 +31,7 @@ const PanicScreen = () => {
 
     setTimeout(() => {
       scrollViewRef.current?.scrollToEnd({ animated: true });
-    },100);
+    }, 100);
   };
 
   return (
