@@ -29,23 +29,25 @@ const PanicScreen = () => {
       </View>
       
       {/* Сообщения */}
-      <ScrollView style={styles.messagesContainer}>
-        {messages.length === 0 ? (
-          <Text style={styles.emptyText}>❌ Сообщений нет</Text>
-        ) : (
-          messages.map((message) => (
-            <View 
-              key={message.id} 
-              style={[
-                styles.messageContainer,
-                message.mine ? styles.myMessage : styles.otherMessage
-              ]}
-            >
-              <Text style={styles.messageText}>{message.text}</Text>
-            </View>
-          ))
-        )}
-      </ScrollView>
+      <View style={styles.messagesWrapper}>
+        <ScrollView style={styles.messagesContainer}>
+          {messages.length === 0 ? (
+            <Text style={styles.emptyText}>❌ Сообщений нет</Text>
+          ) : (
+            messages.map((message) => (
+              <View 
+                key={message.id} 
+                style={[
+                  styles.messageContainer,
+                  message.mine ? styles.myMessage : styles.otherMessage
+                ]}
+              >
+                <Text style={styles.messageText}>{message.text}</Text>
+              </View>
+            ))
+          )}
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -76,9 +78,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 2,
   },
-  messagesContainer: {
+  messagesWrapper: {
     flex: 1,
     paddingHorizontal: 20,
+  },
+  messagesContainer: {
+    flex: 1,
   },
   messageContainer: {
     maxWidth: '75%',
