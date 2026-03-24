@@ -33,7 +33,10 @@ const PanicScreen = () => {
       
       <Text style={styles.title}>📡 ЧАТ ВЫЖИВШИЕ</Text>
 
-      <ScrollView style={styles.chat}>
+      <ScrollView 
+        style={styles.chat}
+        contentContainerStyle={{ paddingBottom: 20 }}
+      >
         {messages.map((msg) => (
           <View key={msg.id} style={styles.message}>
             <Text style={styles.text}>{msg.text}</Text>
