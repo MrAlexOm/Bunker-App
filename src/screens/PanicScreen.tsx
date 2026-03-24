@@ -52,12 +52,15 @@ const styles = StyleSheet.create({
   messagesContainer: {
     flex: 1,
     paddingHorizontal: 20,
+    backgroundColor: '#FF0000', // ВРЕМЕННО для отладки
+    minHeight: 200,
   },
   messageContainer: {
     maxWidth: '75%',
     padding: 12,
     borderRadius: 16,
     marginBottom: 10,
+    backgroundColor: '#00FF00', // ВРЕМЕННО для отладки
   },
   myMessage: {
     alignSelf: 'flex-end',
