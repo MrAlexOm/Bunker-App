@@ -2,27 +2,35 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 const PanicScreen = () => {
+  console.log('🔥 PanicScreen RENDER START');
+  
   const [messages] = useState([
     { id: '1', text: 'Есть кто рядом?', mine: false },
     { id: '2', text: 'Я здесь', mine: true }
   ]);
+
+  console.log('🔥 PanicScreen MESSAGES:', messages);
+  console.log('🔥 PanicScreen MESSAGES LENGTH:', messages.length);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>ЧАТ ВЫЖИВШИЕ</Text>
       
       <ScrollView style={styles.messagesContainer}>
-        {messages.map((message) => (
-          <View 
-            key={message.id} 
-            style={[
-              styles.messageContainer,
-              message.mine ? styles.myMessage : styles.otherMessage
-            ]}
-          >
-            <Text style={styles.messageText}>{message.text}</Text>
-          </View>
-        ))}
+        {messages.map((message) => {
+          console.log('🔥 Mapping message:', message);
+          return (
+            <View 
+              key={message.id} 
+              style={[
+                styles.messageContainer,
+                message.mine ? styles.myMessage : styles.otherMessage
+              ]}
+            >
+              <Text style={styles.messageText}>{message.text}</Text>
+            </View>
+          );
+        })}
       </ScrollView>
     </View>
   );
