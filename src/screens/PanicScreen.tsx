@@ -12,22 +12,27 @@ const PanicScreen = () => {
   return (
   <View style={{ flex: 1, backgroundColor: '#0B0B0B', padding: 20 }}>
     
-    <Text style={{ color: 'red', fontSize: 20 }}>
+    <Text style={{ color: '#FF3B30', fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>
       📡 ЧАТ ВЫЖИВШИЕ
     </Text>
 
-    <Text style={{ color: 'white', marginTop: 20 }}>
-      DEBUG: messages = {JSON.stringify(messages)}
-    </Text>
-
-    {messages.map((msg, index) => {
-      console.log('Mapping message:', msg, 'index:', index);
-      return (
-        <Text key={msg.id} style={{ color: 'white', marginTop: 10 }}>
-          {index}: {msg.text}
-        </Text>
-      );
-    })}
+    <ScrollView 
+      style={{ flex: 1 }}
+      contentContainerStyle={{ paddingBottom: 20 }}
+    >
+      {messages.map((msg, index) => (
+        <View key={msg.id} style={{ 
+          backgroundColor: '#1A1A1A', 
+          padding: 12, 
+          borderRadius: 10, 
+          marginBottom: 10 
+        }}>
+          <Text style={{ color: '#FFFFFF', fontSize: 16 }}>
+            {msg.text}
+          </Text>
+        </View>
+      ))}
+    </ScrollView>
 
   </View>
 );
