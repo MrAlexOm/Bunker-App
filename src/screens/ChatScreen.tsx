@@ -16,11 +16,14 @@ import {
 
 const { width: screenWidth } = Dimensions.get('window');
 
+const DEVICE_ID = 'device_' + Math.random().toString(36).substring(2, 9);
+
 interface Message {
-  id: string;
+  id: string;              // уникальный id (Date.now + random)
   text: string;
-  sender: 'me' | 'other';
+  senderId: string;        // уникальный id устройства
   timestamp: number;
+  ttl: number;             // время жизни (например 5 пересылок)
 }
 
 interface Chat {
@@ -101,10 +104,11 @@ const ChatScreen = () => {
     }
 
     const newMessage: Message = {
-      id: Date.now().toString(),
+      id: Date.now().toString() + '_' + Math.random().toString(36).substring(2, 5),
       text: inputText.trim(),
-      sender: 'me',
-      timestamp: Date.now()
+      senderId: DEVICE_ID,
+      timestamp: Date.now(),
+      ttl: 5
     };
 
     const updatedMessages = [...currentChat.messages, newMessage];
@@ -212,11 +216,11 @@ const ChatScreen = () => {
   const renderMessage = ({ item }: { item: Message }) => (
     <View style={[
       styles.messageRow,
-      item.sender === 'me' ? styles.myMessageRow : styles.otherMessageRow
+      item.senderId === DEVICE_ID ? styles.myMessageRow : styles.otherMessageRow
     ]}>
       <View style={[
         styles.messageBubble,
-        item.sender === 'me' ? styles.myBubble : styles.otherBubble
+        item.senderId === DEVICE_ID ? styles.myBubble : styles.otherBubble
       ]}>
         <Text style={styles.messageText}>{item.text}</Text>
         <Text style={styles.messageTime}>{formatTime(item.timestamp)}</Text>
