@@ -74,7 +74,7 @@ const HomeScreen = () => {
       </View>
 
       {/* Кнопка паники */}
-      <TouchableOpacity style={styles.panicButton} onPress={() => navigation.navigate('Panic')}>
+      <TouchableOpacity style={styles.panicButton} onPress={() => navigation.navigate('Chat')}>
         <View style={styles.panicContent}>
           <Text style={styles.panicIcon}>📡</Text>
           <Text style={styles.panicText}>{translations.panic}</Text>
