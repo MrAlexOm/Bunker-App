@@ -24,6 +24,8 @@ const VIRTUAL_DEVICES = [
   'device_D'
 ];
 
+const STORAGE_KEY = 'bunker_chat_messages';
+
 interface Message {
   id: string;              // уникальный id (Date.now + random)
   text: string;
@@ -134,10 +136,36 @@ const ChatScreen = () => {
     });
   };
 
+  // Сохранение сообщений в localStorage
+  useEffect(() => {
+    try {
+      const lastMessages = messages.slice(-100); // лимит
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(lastMessages));
+    } catch (e) {
+      console.log('Storage save error', e);
+    }
+  }, [messages]);
+
   // Загрузка чатов из localStorage при старте
   useEffect(() => {
     loadChatsFromStorage();
     checkBluetoothSupport();
+    
+    // Загрузка сообщений из localStorage
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setMessages(parsed);
+
+        // заполнить кэш ID
+        parsed.forEach(msg => {
+          receivedMessageIds.current.add(msg.id);
+        });
+      }
+    } catch (e) {
+      console.log('Storage load error', e);
+    }
   }, []);
 
   // Сохранение чатов при изменении
