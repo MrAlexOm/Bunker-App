@@ -53,6 +53,8 @@ const ChatScreen = () => {
 
   // Безопасное добавление сообщения с защитой от дубликатов и TTL логикой
   const addMessageSafe = (message: Message) => {
+    console.log('📥 RECEIVE TRY:', message.id);
+
     // TTL логика - если время жизни закончилось, игнорируем
     if (message.ttl <= 0) {
       return;
@@ -60,6 +62,7 @@ const ChatScreen = () => {
 
     // Если уже видели это сообщение - игнорируем
     if (receivedMessageIds.current.has(message.id)) {
+      console.log('⛔ DUPLICATE BLOCKED:', message.id);
       return;
     }
 
@@ -75,6 +78,12 @@ const ChatScreen = () => {
     // Добавляем в список сообщений
     setMessages(prev => [...prev, messageWithDecreasedTtl]);
 
+    console.log('✅ MESSAGE ADDED:', {
+      id: messageWithDecreasedTtl.id,
+      sender: messageWithDecreasedTtl.senderId,
+      ttl: messageWithDecreasedTtl.ttl
+    });
+
     // Пересылаем сообщение другим устройствам
     forwardMessage(messageWithDecreasedTtl);
   };
@@ -83,6 +92,8 @@ const ChatScreen = () => {
   const simulateIncomingMessage = (originalMessage: Message) => {
     VIRTUAL_DEVICES.forEach((deviceId, index) => {
       setTimeout(() => {
+        console.log('📨 SIMULATED FROM:', deviceId);
+
         const incomingMessage = {
           ...originalMessage,
           id: originalMessage.id + '_' + deviceId,
@@ -98,12 +109,16 @@ const ChatScreen = () => {
 
   // Пересылка сообщений другим устройствам (store & forward)
   const forwardMessage = (message: Message) => {
+    console.log('🔁 FORWARD START:', message.id, 'TTL:', message.ttl);
+
     // если ttl закончился — не пересылаем
     if (message.ttl <= 0) return;
 
     VIRTUAL_DEVICES.forEach((deviceId, index) => {
       // не отправляем самому себе
       if (deviceId === message.senderId) return;
+
+      console.log('📡 FORWARD TO:', deviceId);
 
       setTimeout(() => {
         const forwardedMessage = {
@@ -185,6 +200,13 @@ const ChatScreen = () => {
       timestamp: Date.now(),
       ttl: 5
     };
+
+    console.log('📤 SEND:', {
+      id: newMessage.id,
+      sender: newMessage.senderId,
+      ttl: newMessage.ttl,
+      text: newMessage.text
+    });
 
     // Запускаем симуляцию mesh-сети
     simulateIncomingMessage(newMessage);
