@@ -43,6 +43,32 @@ const ChatScreen = () => {
   const [nearbyDevices, setNearbyDevices] = useState<{ name: string; id: string }[]>([]);
   const flatListRef = useRef<FlatList>(null);
   const [isBluetoothSupported, setIsBluetoothSupported] = useState(false);
+  const receivedMessageIds = useRef(new Set());
+
+  // Безопасное добавление сообщения с защитой от дубликатов и TTL логикой
+  const addMessageSafe = (message: Message) => {
+    // TTL логика - если время жизни закончилось, игнорируем
+    if (message.ttl <= 0) {
+      return;
+    }
+
+    // Если уже видели это сообщение - игнорируем
+    if (receivedMessageIds.current.has(message.id)) {
+      return;
+    }
+
+    // Сохраняем ID сообщения
+    receivedMessageIds.current.add(message.id);
+
+    // Уменьшаем TTL для следующей пересылки
+    const messageWithDecreasedTtl = {
+      ...message,
+      ttl: message.ttl - 1
+    };
+
+    // Добавляем в список сообщений
+    setMessages(prev => [...prev, messageWithDecreasedTtl]);
+  };
 
   // Загрузка чатов из localStorage при старте
   useEffect(() => {
@@ -127,7 +153,7 @@ const ChatScreen = () => {
 
     setChats(updatedChats);
     setCurrentChat(updatedChat);
-    setMessages(limitedMessages);
+    addMessageSafe(newMessage);
     setInputText('');
     scrollToBottom();
   };
@@ -157,7 +183,7 @@ const ChatScreen = () => {
       
       if (existingChat) {
         setCurrentChat(existingChat);
-        setMessages(existingChat.messages);
+        existingChat.messages.forEach(msg => addMessageSafe(msg));
       } else {
         // Создаем новый чат
         const newChat: Chat = {
@@ -183,7 +209,7 @@ const ChatScreen = () => {
   // Выбор чата из списка
   const selectChat = (chat: Chat) => {
     setCurrentChat(chat);
-    setMessages(chat.messages);
+    chat.messages.forEach(msg => addMessageSafe(msg));
     setShowChatList(false);
     scrollToBottom();
   };
