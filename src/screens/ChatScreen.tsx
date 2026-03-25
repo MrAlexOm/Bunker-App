@@ -383,14 +383,24 @@ const ChatScreen = ({ navigation }: { navigation: any }) => {
       ]}>
         <Text style={styles.messageText}>{item.text}</Text>
         <Text style={styles.messageTime}>{formatTime(item.timestamp)}</Text>
-      </TouchableOpacity>
-
-      <Text style={styles.title}>Bluetooth Чат</Text>
-
-      <TouchableOpacity onPress={scanForDevices} style={styles.scanButton} disabled={scanning}>
-        <Text style={styles.scanButtonText}>📡</Text>
-      </TouchableOpacity>
+      </View>
     </View>
+  );
+
+  return (
+    <View style={{ flex: 1 }}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.backButton}>
+          <Text style={styles.back}>←</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.title}>Bluetooth Чат</Text>
+
+        <TouchableOpacity onPress={scanForDevices} style={styles.scanButton} disabled={scanning}>
+          <Text style={styles.scanButtonText}>📡</Text>
+        </TouchableOpacity>
+      </View>
 
     {/* Мои чаты (раскрываемый) */}
     <View style={styles.chatsSection}>
@@ -428,76 +438,45 @@ const ChatScreen = ({ navigation }: { navigation: any }) => {
     </View>
 
     {/* Основной экран чата */}
-    <View style={{ flex: 1 }}>
-      {currentChat ? (
-        <FlatList
-          ref={flatListRef}
-          data={messages}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => {
-            const isMine = item.senderId === DEVICE_ID;
-            return (
-              <View style={[
-                styles.message,
-                isMine ? styles.myMessage : styles.otherMessage
-              ]}>
-                <Text style={styles.messageText}>{item.text}</Text>
-                <Text style={styles.messageTime}>{formatTime(item.timestamp)}</Text>
-              </View>
-            );
-          }}
-          style={styles.messagesList}
-          contentContainerStyle={styles.messagesContainer}
-          onLayout={scrollToBottom}
+      <View style={{ flex: 1 }}>
+        {currentChat ? (
+          <FlatList
+            ref={flatListRef}
+            data={messages}
+            keyExtractor={(item) => item.id}
+            renderItem={renderMessage}
+            style={styles.messagesList}
+            contentContainerStyle={styles.messagesContainer}
+            onLayout={scrollToBottom}
+          />
+        ) : (
+          <View style={styles.noChatContainer}>
+            <Text style={styles.noChatText}>Выберите чат или найдите устройство</Text>
+          </View>
+        )}
+      </View>
+
+      {/* Нижняя панель ввода (фикс в низу) */}
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          value={inputText}
+          onChangeText={setInputText}
+          placeholder="Введите сообщение..."
+          placeholderTextColor="#888"
+          multiline
+          maxLength={500}
         />
-      ) : (
-        <View style={styles.noChatContainer}>
-          <Text style={styles.noChatText}>Выберите чат или найдите устройство</Text>
-        </View>
-      )}
+        <TouchableOpacity 
+          style={styles.sendButton} 
+          onPress={sendMessage}
+          disabled={!inputText.trim() || !currentChat}
+        >
+          <Text style={styles.sendButtonText}>➤</Text>
+        </TouchableOpacity>
+      </View>
     </View>
-
-    {/* Нижняя панель ввода (фикс в низу) */}
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.input}
-        value={inputText}
-        onChangeText={setInputText}
-        placeholder="Введите сообщение..."
-        placeholderTextColor="#888"
-        multiline
-        maxLength={500}
-      />
-      <TouchableOpacity 
-        style={styles.sendButton} 
-        onPress={sendMessage}
-        disabled={!inputText.trim() || !currentChat}
-      >
-        <Text style={styles.sendButtonText}>➤</Text>
-      </TouchableOpacity>
-  </View>
-
-  {/* Нижняя панель ввода (фикс в низу) */}
-  <View style={styles.inputContainer}>
-    <TextInput
-      style={styles.input}
-      value={inputText}
-      onChangeText={setInputText}
-      placeholder="Введите сообщение..."
-      placeholderTextColor="#888"
-      multiline
-      maxLength={500}
-    />
-    <TouchableOpacity 
-      style={styles.sendButton} 
-      onPress={sendMessage}
-      disabled={!inputText.trim() || !currentChat}
-    >
-      <Text style={styles.sendButtonText}>➤</Text>
-    </TouchableOpacity>
-  </View>
-</View>
-);
+  );
 
 const styles = StyleSheet.create({
   container: {
