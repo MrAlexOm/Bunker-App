@@ -395,7 +395,7 @@ const ChatScreen = ({ navigation }: { navigation: any }) => {
           <Text style={styles.back}>←</Text>
         </TouchableOpacity>
 
-        <Text style={styles.title}>Bluetooth Чат</Text>
+        <Text style={styles.title}>🔥 ЧАТ ВЫЖИВШИЕ 🔥</Text>
 
         <TouchableOpacity onPress={scanForDevices} style={styles.scanButton} disabled={scanning}>
           <Text style={styles.scanButtonText}>📡</Text>
