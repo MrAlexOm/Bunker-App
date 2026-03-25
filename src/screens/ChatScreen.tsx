@@ -41,7 +41,7 @@ interface Chat {
   lastMessageTime: number;
 }
 
-const ChatScreen = () => {
+const ChatScreen = ({ navigation }: { navigation: any }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const [currentChat, setCurrentChat] = useState<Chat | null>(null);
