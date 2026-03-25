@@ -47,6 +47,7 @@ const ChatScreen = () => {
   const [currentChat, setCurrentChat] = useState<Chat | null>(null);
   const [chats, setChats] = useState<Chat[]>([]);
   const [showChatList, setShowChatList] = useState(false);
+  const [isChatsOpen, setIsChatsOpen] = useState(false);
   const [scanning, setScanning] = useState(false);
   const [nearbyDevices, setNearbyDevices] = useState<{ name: string; id: string }[]>([]);
   const flatListRef = useRef<FlatList>(null);
@@ -189,7 +190,7 @@ const ChatScreen = () => {
         setMessages(parsed);
 
         // заполнить кэш ID
-        parsed.forEach(msg => {
+        parsed.forEach((msg: Message) => {
           receivedMessageIds.current.add(msg.id);
         });
       }
@@ -382,97 +383,121 @@ const ChatScreen = () => {
       ]}>
         <Text style={styles.messageText}>{item.text}</Text>
         <Text style={styles.messageTime}>{formatTime(item.timestamp)}</Text>
-      </View>
-    </View>
-  );
-
-  return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
-    >
-      {/* Header с поиском */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>
-          {currentChat ? currentChat.name : 'Bluetooth Чат'}
-        </Text>
-        <TouchableOpacity onPress={scanForDevices} style={styles.scanButton} disabled={scanning}>
-          <Text style={styles.scanButtonText}>📡</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Сообщения */}
-      <FlatList
-        ref={flatListRef}
-        data={messages}
-        keyExtractor={(item) => item.id}
-        renderItem={renderMessage}
-        style={styles.messagesList}
-        contentContainerStyle={styles.messagesContainer}
-        onLayout={scrollToBottom}
-      />
-
-      {/* Кнопка "Мои чаты" */}
-      <TouchableOpacity
-        style={styles.chatListButton}
-        onPress={() => setShowChatList(!showChatList)}
-      >
-        <Text style={styles.chatListButtonText}>📋 Мои чаты</Text>
       </TouchableOpacity>
 
-      {/* Список чатов (выпадающий) */}
-      {showChatList && (
-        <View style={styles.chatListPanel}>
-          <ScrollView style={styles.chatListScroll}>
-            {sortedChats.length === 0 ? (
-              <Text style={styles.noChatsText}>Нет сохраненных чатов</Text>
-            ) : (
-              sortedChats.map(chat => (
-                <TouchableOpacity
-                  key={chat.id}
-                  style={styles.chatListItem}
-                  onPress={() => selectChat(chat)}
-                >
-                  <View style={styles.chatListItemLeft}>
-                    <Text style={styles.chatListName}>{chat.name}</Text>
-                    {chat.messages.length > 0 && (
-                      <Text style={styles.chatListPreview} numberOfLines={1}>
-                        {chat.messages[chat.messages.length - 1].text}
-                      </Text>
-                    )}
-                  </View>
-                  <Text style={styles.chatListTime}>
-                    {formatDate(chat.lastMessageTime)}
+      <Text style={styles.title}>Bluetooth Чат</Text>
+
+      <TouchableOpacity onPress={scanForDevices} style={styles.scanButton} disabled={scanning}>
+        <Text style={styles.scanButtonText}>📡</Text>
+      </TouchableOpacity>
+    </View>
+
+    {/* Мои чаты (раскрываемый) */}
+    <View style={styles.chatsSection}>
+      <TouchableOpacity 
+        style={styles.chatsHeader}
+        onPress={() => setIsChatsOpen(prev => !prev)}
+      >
+        <Text style={styles.chatsHeaderText}>📋 Мои чаты</Text>
+        <Text style={styles.chatsToggleIcon}>{isChatsOpen ? '▼' : '▶'}</Text>
+      </TouchableOpacity>
+
+      {isChatsOpen && (
+        <View style={styles.chatsList}>
+          <ScrollView style={{ maxHeight: 250 }} showsVerticalScrollIndicator={true}>
+            {sortedChats.slice(0, 5).map(chat => (
+              <TouchableOpacity
+                key={chat.id}
+                style={styles.chatListItem}
+                onPress={() => selectChat(chat)}
+              >
+                <View style={styles.chatListItemLeft}>
+                  <Text style={styles.chatListName}>{chat.name}</Text>
+                  <Text style={styles.chatListPreview}>
+                    {chat.messages[chat.messages.length - 1]?.text || 'Нет сообщений'}
                   </Text>
-                </TouchableOpacity>
-              ))
-            )}
+                </View>
+                <Text style={styles.chatListTime}>
+                  {formatDate(chat.lastMessageTime)}
+                </Text>
+              </TouchableOpacity>
+            ))}
           </ScrollView>
         </View>
       )}
+    </View>
 
-      {/* Ввод сообщения */}
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          value={inputText}
-          onChangeText={setInputText}
-          placeholder={currentChat ? "Введите сообщение..." : "Сначала найдите собеседника 📡"}
-          placeholderTextColor="#888"
-          multiline
+    {/* Основной экран чата */}
+    <View style={{ flex: 1 }}>
+      {currentChat ? (
+        <FlatList
+          ref={flatListRef}
+          data={messages}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => {
+            const isMine = item.senderId === DEVICE_ID;
+            return (
+              <View style={[
+                styles.message,
+                isMine ? styles.myMessage : styles.otherMessage
+              ]}>
+                <Text style={styles.messageText}>{item.text}</Text>
+                <Text style={styles.messageTime}>{formatTime(item.timestamp)}</Text>
+              </View>
+            );
+          }}
+          style={styles.messagesList}
+          contentContainerStyle={styles.messagesContainer}
+          onLayout={scrollToBottom}
         />
-        <TouchableOpacity
-          style={[styles.sendButton, !currentChat && styles.sendButtonDisabled]}
-          onPress={sendMessage}
-          disabled={!currentChat}
-        >
-          <Text style={styles.sendButtonText}>✉️</Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
-  );
-};
+      ) : (
+        <View style={styles.noChatContainer}>
+          <Text style={styles.noChatText}>Выберите чат или найдите устройство</Text>
+        </View>
+      )}
+    </View>
+
+    {/* Нижняя панель ввода (фикс в низу) */}
+    <View style={styles.inputContainer}>
+      <TextInput
+        style={styles.input}
+        value={inputText}
+        onChangeText={setInputText}
+        placeholder="Введите сообщение..."
+        placeholderTextColor="#888"
+        multiline
+        maxLength={500}
+      />
+      <TouchableOpacity 
+        style={styles.sendButton} 
+        onPress={sendMessage}
+        disabled={!inputText.trim() || !currentChat}
+      >
+        <Text style={styles.sendButtonText}>➤</Text>
+      </TouchableOpacity>
+  </View>
+
+  {/* Нижняя панель ввода (фикс в низу) */}
+  <View style={styles.inputContainer}>
+    <TextInput
+      style={styles.input}
+      value={inputText}
+      onChangeText={setInputText}
+      placeholder="Введите сообщение..."
+      placeholderTextColor="#888"
+      multiline
+      maxLength={500}
+    />
+    <TouchableOpacity 
+      style={styles.sendButton} 
+      onPress={sendMessage}
+      disabled={!inputText.trim() || !currentChat}
+    >
+      <Text style={styles.sendButtonText}>➤</Text>
+    </TouchableOpacity>
+  </View>
+</View>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -489,29 +514,20 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#2A2A2A',
   },
-  headerTitle: {
+  backButton: {
+    padding: 8,
+    borderRadius: 4,
+  },
+  back: {
+    fontSize: 20,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+  title: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#FFFFFF',
-  },
-  scanButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#2A2A2A',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  scanButtonText: {
-    fontSize: 22,
-  },
-  messagesList: {
     flex: 1,
-  },
-  messagesContainer: {
-    paddingHorizontal: 12,
-    paddingVertical: 16,
-  },
   messageRow: {
     marginBottom: 12,
   },
