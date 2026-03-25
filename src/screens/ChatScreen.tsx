@@ -74,6 +74,9 @@ const ChatScreen = () => {
 
     // Добавляем в список сообщений
     setMessages(prev => [...prev, messageWithDecreasedTtl]);
+
+    // Пересылаем сообщение другим устройствам
+    forwardMessage(messageWithDecreasedTtl);
   };
 
   // Симуляция получения сообщений от виртуальных устройств (mesh-сеть)
@@ -90,6 +93,29 @@ const ChatScreen = () => {
 
         addMessageSafe(incomingMessage);
       }, 800 * (index + 1)); // задержка как в реальной сети
+    });
+  };
+
+  // Пересылка сообщений другим устройствам (store & forward)
+  const forwardMessage = (message: Message) => {
+    // если ttl закончился — не пересылаем
+    if (message.ttl <= 0) return;
+
+    VIRTUAL_DEVICES.forEach((deviceId, index) => {
+      // не отправляем самому себе
+      if (deviceId === message.senderId) return;
+
+      setTimeout(() => {
+        const forwardedMessage = {
+          ...message,
+          id: message.id + '_fwd_' + deviceId + '_' + Date.now(),
+          senderId: deviceId,
+          timestamp: Date.now(),
+          ttl: message.ttl - 1,
+        };
+
+        addMessageSafe(forwardedMessage);
+      }, 1000 + index * 700);
     });
   };
 
