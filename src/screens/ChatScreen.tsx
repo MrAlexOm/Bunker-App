@@ -52,6 +52,7 @@ const ChatScreen = () => {
   const flatListRef = useRef<FlatList>(null);
   const [isBluetoothSupported, setIsBluetoothSupported] = useState(false);
   const receivedMessageIds = useRef(new Set());
+  const forwardCounter = useRef(0);
 
   // Безопасное добавление сообщения с защитой от дубликатов и TTL логикой
   const addMessageSafe = (message: Message) => {
@@ -78,7 +79,16 @@ const ChatScreen = () => {
     };
 
     // Добавляем в список сообщений
-    setMessages(prev => [...prev, messageWithDecreasedTtl]);
+    setMessages(prev => {
+      const updated = [...prev, messageWithDecreasedTtl];
+
+      // оставляем максимум 100 сообщений
+      if (updated.length > 100) {
+        return updated.slice(-100);
+      }
+
+      return updated;
+    });
 
     console.log('✅ MESSAGE ADDED:', {
       id: messageWithDecreasedTtl.id,
@@ -113,6 +123,17 @@ const ChatScreen = () => {
   const forwardMessage = (message: Message) => {
     console.log('🔁 FORWARD START:', message.id, 'TTL:', message.ttl);
 
+    // дополнительная проверка TTL
+    if (message.ttl <= 1) return;
+
+    // ограничение пересылок
+    if (forwardCounter.current > 20) {
+      console.log('⛔ FORWARD LIMIT');
+      return;
+    }
+
+    forwardCounter.current++;
+
     // если ttl закончился — не пересылаем
     if (message.ttl <= 0) return;
 
@@ -145,6 +166,15 @@ const ChatScreen = () => {
       console.log('Storage save error', e);
     }
   }, [messages]);
+
+  // Сброс счетчика пересылок каждые 5 секунд
+  useEffect(() => {
+    const interval = setInterval(() => {
+      forwardCounter.current = 0;
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Загрузка чатов из localStorage при старте
   useEffect(() => {
