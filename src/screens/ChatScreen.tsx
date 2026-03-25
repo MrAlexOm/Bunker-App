@@ -18,6 +18,12 @@ const { width: screenWidth } = Dimensions.get('window');
 
 const DEVICE_ID = 'device_' + Math.random().toString(36).substring(2, 9);
 
+const VIRTUAL_DEVICES = [
+  'device_B',
+  'device_C',
+  'device_D'
+];
+
 interface Message {
   id: string;              // уникальный id (Date.now + random)
   text: string;
@@ -68,6 +74,23 @@ const ChatScreen = () => {
 
     // Добавляем в список сообщений
     setMessages(prev => [...prev, messageWithDecreasedTtl]);
+  };
+
+  // Симуляция получения сообщений от виртуальных устройств (mesh-сеть)
+  const simulateIncomingMessage = (originalMessage: Message) => {
+    VIRTUAL_DEVICES.forEach((deviceId, index) => {
+      setTimeout(() => {
+        const incomingMessage = {
+          ...originalMessage,
+          id: originalMessage.id + '_' + deviceId,
+          senderId: deviceId,
+          timestamp: Date.now(),
+          ttl: originalMessage.ttl - 1,
+        };
+
+        addMessageSafe(incomingMessage);
+      }, 800 * (index + 1)); // задержка как в реальной сети
+    });
   };
 
   // Загрузка чатов из localStorage при старте
@@ -136,6 +159,9 @@ const ChatScreen = () => {
       timestamp: Date.now(),
       ttl: 5
     };
+
+    // Запускаем симуляцию mesh-сети
+    simulateIncomingMessage(newMessage);
 
     const updatedMessages = [...currentChat.messages, newMessage];
     // Ограничиваем до 200 сообщений
