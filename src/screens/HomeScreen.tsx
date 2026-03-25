@@ -80,14 +80,6 @@ const HomeScreen = () => {
           <Text style={styles.panicText}>{translations.panic}</Text>
         </View>
       </TouchableOpacity>
-
-      {/* Кнопка чата */}
-      <TouchableOpacity style={styles.chatButton} onPress={() => navigation.navigate('Chat')}>
-        <View style={styles.chatContent}>
-          <Text style={styles.chatIcon}>💬</Text>
-          <Text style={styles.chatText}>Bluetooth Чат</Text>
-        </View>
-      </TouchableOpacity>
     </View>
   );
 };
